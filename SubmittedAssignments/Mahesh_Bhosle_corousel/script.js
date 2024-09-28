@@ -4,7 +4,7 @@ class CarouselElement extends HTMLElement {
     }
 
     defaultConfig = {
-        "carouselClass": "carousel carousel-dark",
+        "carouselClass": "carousel slide carousel-dark",
         "innerClass": "carousel-inner",
         "itemClass": "carousel-item",
         "imgClass": "d-block w-100 ratio ratio-21x9",
@@ -16,8 +16,9 @@ class CarouselElement extends HTMLElement {
         "indicatorClass": "carousel-indicators",
         "indicatorItemClass": "carousel-indicator",
         "activeClass": "active",
-        "ride": "", // carousel
+        "ride": "carousel", // 
         "touch": true,
+        "slide": true,  // New option for enabling/disabling slide
         "captionClass": "carousel-caption d-none d-md-block mb-4",
         "captionTitleClass": "carousel-title h1 text-danger text-uppercase text-decoration-none",
         "captionSubTitleClass": "carousel-subtitle h3 text-muted",
@@ -86,9 +87,15 @@ class CarouselElement extends HTMLElement {
         this.innerHTML = '';  // Clear content before rendering
 
         let carouselElm = this.createDivElement(this.config.carouselClass);
+        
         carouselElm.setAttribute('data-bs-ride', this.config.ride);
         carouselElm.setAttribute('data-bs-touch', this.config.touch);
         carouselElm.id = "customCarousel";
+
+          // Disable slide if slide is set to false
+          if (!this.config.slide) {
+            carouselElm.setAttribute('data-bs-interval', 'false');
+        }
 
         if (this.config.indicators) {
             let indicatorContainer = this.createDivElement(this.config.indicatorClass);
@@ -217,3 +224,8 @@ class CarouselElement extends HTMLElement {
 }
 
 customElements.define("carousel-element", CarouselElement);
+
+
+
+if (!window.customElementsList) window.customElementsList = [];
+window.customElementsList.push({ component: 'card-component', componentClass: CardComponent });
