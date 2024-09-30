@@ -218,7 +218,6 @@ class CarouselElement extends HTMLElement {
 
         buttonElm.appendChild(iconElm);
         buttonElm.appendChild(textElm);
-
         return buttonElm;
     }
 }
@@ -229,3 +228,4 @@ customElements.define("carousel-element", CarouselElement);
 
 if (!window.customElementsList) window.customElementsList = [];
 window.customElementsList.push({ component: 'carousel-element', componentClass: CarouselElement });
+
