@@ -4,7 +4,7 @@ class CardComponent extends HTMLElement {
     defaultConfig = {
         cardContainerClass: "card",
         cardBodyClass: "card-body",
-        imageClass: "card-img-top",
+        imageClass: "card-img-bottom",
         titleClass: "card-title",
         textClass: "card-text"
     };
