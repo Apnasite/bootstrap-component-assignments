@@ -228,4 +228,4 @@ customElements.define("carousel-element", CarouselElement);
 
 
 if (!window.customElementsList) window.customElementsList = [];
-window.customElementsList.push({ component: 'card-component', componentClass: CardComponent });
+window.customElementsList.push({ component: 'carousel-element', componentClass: CarouselElement });
