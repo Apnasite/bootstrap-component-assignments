@@ -15,7 +15,7 @@ class CardComponent extends HTMLElement {
         description: "This is a sample description for the card component.",
         image: "https://via.placeholder.com/150"
     };
-
+a2
     data = {};
     config = {};
 
