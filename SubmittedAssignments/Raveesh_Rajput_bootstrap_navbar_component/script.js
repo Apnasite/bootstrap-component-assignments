@@ -99,7 +99,6 @@ class Navbar extends HTMLElement {
         this.data = this.defaultData;
     }
 
-
     createElement(tag, className) {
         const element = document.createElement(tag);
         if (className) {
