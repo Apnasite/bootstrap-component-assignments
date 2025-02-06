@@ -1,0 +1,98 @@
+{
+    "fields": [
+      {
+        "name": "config.menuButton.showButton",
+        "type": "boolean",
+        "label": "Show Menu Button",
+        "default": true
+      },
+      {
+        "name": "config.menuButton.buttonClasses",
+        "type": "string",
+        "label": "Menu Button Classes",
+        "default": "btn btn-primary position-fixed top-0 start-0 m-3 d-md-block"
+      },
+      {
+        "name": "config.menuButton.iconClasses",
+        "type": "string",
+        "label": "Menu Button Icon Classes",
+        "default": "bi bi-list"
+      },
+      {
+        "name": "config.closeButton.buttonClasses",
+        "type": "string",
+        "label": "Close Button Classes",
+        "default": "btn btn-secondary position-absolute top-0 end-0 m-3"
+      },
+      {
+        "name": "config.closeButton.iconClasses",
+        "type": "string",
+        "label": "Close Button Icon Classes",
+        "default": "bi bi-x"
+      },
+      {
+        "name": "data.heading",
+        "type": "string",
+        "label": "Sidebar Heading",
+        "default": "Sidebar"
+      },
+      {
+        "name": "data.logo.src",
+        "type": "string",
+        "label": "Logo Source",
+        "default": "./img/logo1.avif"
+      },
+      {
+        "name": "data.logo.alt",
+        "type": "string",
+        "label": "Logo Alt Text",
+        "default": "Logo"
+      },
+      {
+        "name": "data.logo.classes",
+        "type": "string",
+        "label": "Logo Classes",
+        "default": "img-fluid rounded-circle w-25 mb-4 mt-4"
+      },
+      {
+        "name": "data.links",
+        "type": "array",
+        "label": "Sidebar Links",
+        "fields": [
+          {
+            "name": "label",
+            "type": "string",
+            "label": "Link Label"
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "label": "Link URL"
+          },
+          {
+            "name": "iconClasses",
+            "type": "string",
+            "label": "Icon Classes"
+          },
+          {
+            "name": "dropdown",
+            "type": "array",
+            "label": "Dropdown Links",
+            "fields": [
+              {
+                "name": "label",
+                "type": "string",
+                "label": "Dropdown Label"
+              },
+              {
+                "name": "url",
+                "type": "string",
+                "label": "Dropdown URL"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
