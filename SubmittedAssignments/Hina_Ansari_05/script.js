@@ -2,7 +2,7 @@ class CardComponent extends HTMLElement {
     static observedAttributes = ["config", "data"];
 
     defaultConfig = {
-        cardContainerClass: "row p-5 bg-primary text-white",
+        cardContainerClass: "row p-5 bg-img text-white",
         colClass: "col-lg-3",
         cardBodyClass: "card-body",
         iconClass: "bi fs-1 border border-3 rounded-circle p-3 text-center position-absolute top-25",
@@ -86,6 +86,13 @@ class CardComponent extends HTMLElement {
             @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css");
             @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 
+           .bg-img {
+                        height: 100%;
+                        margin: 0;
+                        background: url('./img/web-bg.jpg') repeat center center fixed;
+                        
+
+            }
             .hover-active {
                 transform: scale(1.2);
                 background-color: #ffffff;
