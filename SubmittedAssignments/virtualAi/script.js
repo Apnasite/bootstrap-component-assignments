@@ -22,7 +22,7 @@ class VirtualAssistant extends HTMLElement {
     logoClass: "mb-3 p-2",
     videoClass: "w-100 mb-3 bg-danger rounded",
     micButtonClass: "btn btn-primary rounded-5 d-flex align-items-center justify-content-center mb-2",
-    answerMicButtonClass: "btn btn-success rounded-5 d-flex align-items-center justify-content-center mt-2",
+    answerMicButtonClass: "btn btn-success rounded-5 d-flex align-items-center justify-content-center mt-2 d-none",
     cameraButtonClass: "btn btn-primary rounded-5",
     chatBubbleUserClass: "bg-info text-white",
     chatBubbleAIClass: "bg-danger text-white",
@@ -96,6 +96,7 @@ class VirtualAssistant extends HTMLElement {
     answerMicButton.id = "btn-answer-mic";
     answerMicButton.className = this.config.answerMicButtonClass;
     answerMicButton.textContent = "Give Answer";
+    answerMicButton.style.display = 'none';
     this.answerMicButton = answerMicButton;
 
     const submitAnswerButton = document.createElement("button");
@@ -124,6 +125,7 @@ class VirtualAssistant extends HTMLElement {
       const transcript = event.results[ event.results.length-1][0].transcript;
         this.addChatMessage(`${this.data?.UserDetails?.name || 'User'}: ${transcript.trim()}`, false);
         currentTranscript += transcript + " ";
+        btnSubmitAnswer.style.display = 'block';
     };
   
     answerRecognition.onend = () => {
@@ -133,6 +135,7 @@ class VirtualAssistant extends HTMLElement {
     };
   
     btnAnswerMic.addEventListener("click", () => {
+      console.log('btnAnswerMic clicked')
       this.isAnsGiven=false
       btnAnswerMic.style.display = 'none';
       btnSubmitAnswer.style.display = 'block';
@@ -175,6 +178,7 @@ class VirtualAssistant extends HTMLElement {
 
   speak(text) {
     const btnAnswerMic = this.querySelector("#btn-answer-mic");
+    const btnSubmitAnswer = this.querySelector("#btn-submit-answer");
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-US";
     utterance.onstart = () => {
@@ -182,6 +186,7 @@ class VirtualAssistant extends HTMLElement {
       this.submitAnswerButton.style.display = 'none';
     };
     utterance.onend = () => {
+      btnAnswerMic.click();
       this.answerMicButton.style.display = 'block';
       this.submitAnswerButton.style.display = 'none';
     };
