@@ -204,19 +204,34 @@ class InterviewSelectionComponent extends HTMLElement {
     };
 
     console.log('Selected data:', selectionData);
-    const customEvent = new CustomEvent('redirect', {
-      bubbles: true,
-      cancelable: true,
-      detail: {
-        data: {
-          isExternalRedirect: false,
-          redirectUrl: `/test/67b2e622159389010cc5534f/Interview`,
-          queryParams: JSON.stringify(selectionData)
+    if(this.data && this.data.UserDetails && this.data.UserDetails.id){
+      const customEvent = new CustomEvent('redirect', {
+        bubbles: true,
+        cancelable: true,
+        detail: {
+          data: {
+            isExternalRedirect: false,
+            redirectUrl: `/test/67b97e9b6da0f38ed9f7bf7a/Interview`,
+            queryParams: JSON.stringify(selectionData)
+          }
         }
-      }
-    });
-
-    this.dispatchEvent(customEvent);
+      });
+      this.dispatchEvent(customEvent);
+    }else{
+      let queryParams=JSON.stringify(selectionData)
+      const customEvent = new CustomEvent('redirect', {
+        bubbles: true,
+        cancelable: true,
+        detail: {
+          data: {
+            isExternalRedirect: false,
+            redirectUrl: `/auth/quick-register?source=InterviewLandingPage&leadCategory=Service&leadType=Interview&module=LMS&placement=hero&redirect=%2Ftest%2F67b97e9b6da0f38ed9f7bf7a%2Finterview?${queryParams}`,
+            queryParams: ''
+          }
+        }
+      });
+      this.dispatchEvent(customEvent);
+    }
   }
 }
 
