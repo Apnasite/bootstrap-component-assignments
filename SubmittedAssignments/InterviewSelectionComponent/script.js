@@ -3,7 +3,7 @@ class InterviewSelectionComponent extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
-    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <div class="p-3 text-center bg-dark text-white">
       <div class="container text-center">
           <div class="row text-left">
