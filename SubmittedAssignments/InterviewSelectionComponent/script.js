@@ -226,7 +226,7 @@ class InterviewSelectionComponent extends HTMLElement {
           data: {
             isExternalRedirect: false,
             redirectUrl: `/auth/quick-register?source=InterviewLandingPage&leadCategory=Service&leadType=Interview&module=LMS&placement=hero&redirect=%2Ftest%2F67b97e9b6da0f38ed9f7bf7a%2Finterview?${queryParams}`,
-            queryParams: ''
+            queryParams: '{}'
           }
         }
       });
