@@ -2,7 +2,7 @@ class InterviewSelectionComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.innerHTML = `
+    this.innerHTML = `
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <div class="p-3 text-center bg-dark text-white">
       <div class="container text-center">
@@ -42,15 +42,15 @@ class InterviewSelectionComponent extends HTMLElement {
     </div>
 `;
 
-    this.industrySelect = this.shadowRoot.getElementById('industrySelect');
-    this.roleSelect = this.shadowRoot.getElementById('roleSelect');
-    this.skillsContainer = this.shadowRoot.getElementById('skillsContainer');
-    this.submitBtn = this.shadowRoot.getElementById('submitBtn');
-    this.industryError = this.shadowRoot.getElementById('industryError');
-    this.roleError = this.shadowRoot.getElementById('roleError');
-    this.skillsError = this.shadowRoot.getElementById('skillsError');
-    this.popup = this.shadowRoot.getElementById('popup');
-    this.closePopup = this.shadowRoot.getElementById('closePopup');
+    this.industrySelect = this.getElementById('industrySelect');
+    this.roleSelect = this.getElementById('roleSelect');
+    this.skillsContainer = this.getElementById('skillsContainer');
+    this.submitBtn = this.getElementById('submitBtn');
+    this.industryError = this.getElementById('industryError');
+    this.roleError = this.getElementById('roleError');
+    this.skillsError = this.getElementById('skillsError');
+    this.popup = this.getElementById('popup');
+    this.closePopup = this.getElementById('closePopup');
 
     this.industrySelect.addEventListener('change', () => this.populateRoles());
     this.roleSelect.addEventListener('change', () => this.populateSkills());
