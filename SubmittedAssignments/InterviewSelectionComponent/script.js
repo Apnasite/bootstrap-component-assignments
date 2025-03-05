@@ -218,14 +218,13 @@ class InterviewSelectionComponent extends HTMLElement {
       });
       this.dispatchEvent(customEvent);
     }else{
-      let queryParams=JSON.stringify(selectionData)
-      let queryParamsStr = {
+      let queryParams = {
         source:'InterviewLandingPage',
         leadCategory:'Service',
         leadType:'Interview',
         module:'LMS',
-        placement:'hero',
-        redirect:`test/67b97e9b6da0f38ed9f7bf7a/interview?${queryParams}`
+        placement:'SkillsSelectionComponent',
+        redirect:`test/67b97e9b6da0f38ed9f7bf7a/interview?industry=${selectedIndustry}&role=${selectedRole}&skills=${selectedSkills.join(' ')}`
       }
       const customEvent = new CustomEvent('redirect', {
         bubbles: true,
@@ -234,7 +233,7 @@ class InterviewSelectionComponent extends HTMLElement {
           data: {
             isExternalRedirect: false,
             redirectUrl: `/auth/quick-register`,
-            queryParams:JSON.stringify( queryParamsStr)
+            queryParams:JSON.stringify( queryParams)
           }
         }
       });
