@@ -1,67 +1,78 @@
 class InterviewSelectionComponent extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-    this.innerHTML = `
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <div class="p-3 text-center bg-dark text-white">
-      <div class="container text-center">
-          <div class="row text-left">
-              <div class="col-md-6">
-                  <div class="form-group">
-                      <label for="industrySelect">Industry</label>
-                      <select class="form-control" id="industrySelect">
-                          <option value="">Select Industry</option>
-                          <option value="It-Industry">It Industry</option>
-                      </select>
-                      <div id="industryError" class="text-danger"></div>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="form-group">
-                      <label for="roleSelect">Role</label>
-                      <select class="form-control" id="roleSelect">
-                          <option value="">Select Role</option>
-                      </select>
-                      <div id="roleError" class="text-danger"></div>
-                  </div>
-              </div>
-          </div>
-          <div class="form-group" id="skillsContainer" class="text-left">
-              <label>Skills</label><br>
-              <div id="skillsError" class="text-danger"></div>
-              <div class="d-flex flex-wrap" id="skillsList">
-              </div>
-          </div>
-          <button id="submitBtn" class="btn btn-success">Start Interview</button>
-      </div>
-    </div>
-    <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
-        <p>Please select at least one skill.</p>
-        <button id="closePopup" class="btn btn-secondary">Close</button>
-    </div>
-`;
+    this.industrySelect = null;
+    this.roleSelect = null;
+    this.skillsContainer = null;
+    this.submitBtn = null;
+    this.industryError = null;
+    this.roleError = null;
+    this.skillsError = null;
+    this.popup = null;
+    this.closePopup = null;
+    this.data = null;
+  }
 
-    this.industrySelect = this.getElementById('industrySelect');
-    this.roleSelect = this.getElementById('roleSelect');
-    this.skillsContainer = this.getElementById('skillsContainer');
-    this.submitBtn = this.getElementById('submitBtn');
-    this.industryError = this.getElementById('industryError');
-    this.roleError = this.getElementById('roleError');
-    this.skillsError = this.getElementById('skillsError');
-    this.popup = this.getElementById('popup');
-    this.closePopup = this.getElementById('closePopup');
-
+  connectedCallback() {
+    this.renderComponent();
+    this.updateData();
     this.industrySelect.addEventListener('change', () => this.populateRoles());
     this.roleSelect.addEventListener('change', () => this.populateSkills());
     this.submitBtn.addEventListener('click', () => this.submitSelection());
     this.closePopup.addEventListener('click', () => this.popup.style.display = 'none');
   }
 
-  connectedCallback() {
-    this.updateData();
-  }
+  renderComponent() {
+    this.innerHTML = `
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <div class="p-3 text-center bg-dark text-white">
+        <div class="container text-center">
+          <div class="row text-left">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="industrySelect">Industry</label>
+                <select class="form-control" id="industrySelect">
+                  <option value="">Select Industry</option>
+                  <option value="It-Industry">It Industry</option>
+                </select>
+                <div id="industryError" class="text-danger"></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="roleSelect">Role</label>
+                <select class="form-control" id="roleSelect">
+                  <option value="">Select Role</option>
+                </select>
+                <div id="roleError" class="text-danger"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" id="skillsContainer" class="text-left">
+            <label>Skills</label><br>
+            <div id="skillsError" class="text-danger"></div>
+            <div class="d-flex flex-wrap" id="skillsList">
+            </div>
+          </div>
+          <button id="submitBtn" class="btn btn-success">Start Interview</button>
+        </div>
+      </div>
+      <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
+        <p>Please select at least one skill.</p>
+        <button id="closePopup" class="btn btn-secondary">Close</button>
+      </div>
+    `;
 
+    this.industrySelect = this.querySelector('#industrySelect');
+    this.roleSelect = this.querySelector('#roleSelect');
+    this.skillsContainer = this.querySelector('#skillsContainer');
+    this.submitBtn = this.querySelector('#submitBtn');
+    this.industryError = this.querySelector('#industryError');
+    this.roleError = this.querySelector('#roleError');
+    this.skillsError = this.querySelector('#skillsError');
+    this.popup = this.querySelector('#popup');
+    this.closePopup = this.querySelector('#closePopup');
+  }
   static get observedAttributes() {
     return ['data'];
   }
