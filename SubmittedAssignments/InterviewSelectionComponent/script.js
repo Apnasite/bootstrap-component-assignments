@@ -3,36 +3,38 @@ class InterviewSelectionComponent extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.innerHTML = `
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="industrySelect">Industry</label>
-                    <select class="form-control" id="industrySelect">
-                        <option value="">Select Industry</option>
-                        <option value="It-Industry">It Industry</option>
-                    </select>
-                    <div id="industryError" class="text-danger"></div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="roleSelect">Role</label>
-                    <select class="form-control" id="roleSelect">
-                        <option value="">Select Role</option>
-                    </select>
-                    <div id="roleError" class="text-danger"></div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group" id="skillsContainer">
-            <label>Skills</label><br>
-            <div id="skillsError" class="text-danger"></div>
-            <div class="d-flex flex-wrap" id="skillsList">
-            </div>
-        </div>
-        <button id="submitBtn" class="btn btn-success">Start Interview</button>
+    
+    <div class="p-3 text-center bg-dark text-white">
+      <div class="container text-center">
+          <div class="row text-left">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="industrySelect">Industry</label>
+                      <select class="form-control" id="industrySelect">
+                          <option value="">Select Industry</option>
+                          <option value="It-Industry">It Industry</option>
+                      </select>
+                      <div id="industryError" class="text-danger"></div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="roleSelect">Role</label>
+                      <select class="form-control" id="roleSelect">
+                          <option value="">Select Role</option>
+                      </select>
+                      <div id="roleError" class="text-danger"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group" id="skillsContainer" class="text-left">
+              <label>Skills</label><br>
+              <div id="skillsError" class="text-danger"></div>
+              <div class="d-flex flex-wrap" id="skillsList">
+              </div>
+          </div>
+          <button id="submitBtn" class="btn btn-success">Start Interview</button>
+      </div>
     </div>
     <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
         <p>Please select at least one skill.</p>
