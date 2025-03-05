@@ -219,14 +219,22 @@ class InterviewSelectionComponent extends HTMLElement {
       this.dispatchEvent(customEvent);
     }else{
       let queryParams=JSON.stringify(selectionData)
+      let queryParamsStr = {
+        source:InterviewLandingPage,
+        leadCategory:Service,
+        leadType:Interview,
+        module:LMS,
+        placement:hero,
+        redirect:`test/67b97e9b6da0f38ed9f7bf7a/interview?${queryParams}`
+      }
       const customEvent = new CustomEvent('redirect', {
         bubbles: true,
         cancelable: true,
         detail: {
           data: {
             isExternalRedirect: false,
-            redirectUrl: `/auth/quick-register?source=InterviewLandingPage&leadCategory=Service&leadType=Interview&module=LMS&placement=hero&redirect=%2Ftest%2F67b97e9b6da0f38ed9f7bf7a%2Finterview?${queryParams}`,
-            queryParams: '{}'
+            redirectUrl: `/auth/quick-register`,
+            queryParams:JSON.stringify( queryParamsStr)
           }
         }
       });
