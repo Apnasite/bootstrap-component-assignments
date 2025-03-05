@@ -32,7 +32,7 @@ class InterviewSelectionComponent extends HTMLElement {
             <div class="d-flex flex-wrap" id="skillsList">
             </div>
         </div>
-        <button id="submitBtn" class="btn btn-primary">Start Interview</button>
+        <button id="submitBtn" class="btn btn-success">Start Interview</button>
     </div>
     <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
         <p>Please select at least one skill.</p>
@@ -220,11 +220,11 @@ class InterviewSelectionComponent extends HTMLElement {
     }else{
       let queryParams=JSON.stringify(selectionData)
       let queryParamsStr = {
-        source:InterviewLandingPage,
-        leadCategory:Service,
-        leadType:Interview,
-        module:LMS,
-        placement:hero,
+        source:'InterviewLandingPage',
+        leadCategory:'Service',
+        leadType:'Interview',
+        module:'LMS',
+        placement:'hero',
         redirect:`test/67b97e9b6da0f38ed9f7bf7a/interview?${queryParams}`
       }
       const customEvent = new CustomEvent('redirect', {
