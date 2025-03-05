@@ -24,9 +24,9 @@ class InterviewSelectionComponent extends HTMLElement {
 
   renderComponent() {
     this.innerHTML = `
-       <div class="p-3 text-center bg-dark text-white">
-        <div class="container text-center">
-          <div class="row text-left">
+       <div class="p-3 bg-dark text-white" data-bs-theme="dark">
+        <div class="container">
+          <div class="row text-left ">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="industrySelect">Industry</label>
@@ -53,7 +53,10 @@ class InterviewSelectionComponent extends HTMLElement {
             <div class="d-flex flex-wrap" id="skillsList">
             </div>
           </div>
-          <button id="submitBtn" class="btn btn-success">Start Interview</button>
+          <div class="text-center p-3">
+            <button id="submitBtn" class="btn btn-success">Start Interview</button>
+          </div>
+          
         </div>
       </div>
       <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; z-index: 1000;">
