@@ -24,8 +24,7 @@ class InterviewSelectionComponent extends HTMLElement {
 
   renderComponent() {
     this.innerHTML = `
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-      <div class="p-3 text-center bg-dark text-white">
+       <div class="p-3 text-center bg-dark text-white">
         <div class="container text-center">
           <div class="row text-left">
             <div class="col-md-6">
