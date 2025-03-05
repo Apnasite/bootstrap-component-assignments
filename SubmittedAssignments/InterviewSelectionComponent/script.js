@@ -171,7 +171,7 @@ class InterviewSelectionComponent extends HTMLElement {
       checkbox.type = 'checkbox';
       checkbox.id = skillId;
       checkbox.value = skillId;
-      checkbox.classList.add('mr-1');
+      checkbox.classList.add('m-2');
       const label = document.createElement('label');
       label.htmlFor = skillId;
       label.textContent = skill;
