@@ -32,7 +32,7 @@ class InterviewSelectionComponent extends HTMLElement {
                 <label for="industrySelect">Industry</label>
                 <select class="form-control" id="industrySelect">
                   <option value="">Select Industry</option>
-                  <option value="It-Industry">It Industry</option>
+                  <option value="It-Industry">IT Industry</option>
                 </select>
                 <div id="industryError" class="text-danger"></div>
               </div>
