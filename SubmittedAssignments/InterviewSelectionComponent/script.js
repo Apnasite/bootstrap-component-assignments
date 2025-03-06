@@ -26,6 +26,10 @@ class InterviewSelectionComponent extends HTMLElement {
     this.innerHTML = `
        <div class="p-3 bg-dark text-white" data-bs-theme="dark">
         <div class="container">
+          <div class="text-center mb-4">
+                <h2>🚀 Apna AI Interviewer – Your Smart Interview Coach!</h2>
+                <p>🎯 Personalized Mock Interviews for Your Dream Job. Select your industry, role, and key skills, and let AI guide you with real-time feedback. Sign up now and start your free mock interview!</p>
+          </div>
           <div class="row text-left ">
             <div class="col-md-6">
               <div class="form-group">
