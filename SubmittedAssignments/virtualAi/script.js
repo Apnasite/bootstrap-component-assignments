@@ -175,10 +175,12 @@ class VirtualAssistant extends HTMLElement {
     bubble.textContent = message;
     chatMessage.style.width = "90%";
     chatMessage.appendChild(bubble);
+    if(this.chatSection){
+      this.chatSection?.insertBefore(chatMessage, this.answerMicButton);
 
-    this.chatSection?.insertBefore(chatMessage, this.answerMicButton);
-
-    this.chatSection?.scrollTop = this.chatSection?.scrollHeight;
+      this.chatSection.scrollTop = this.chatSection?.scrollHeight;
+    }
+    
   }
 
   speak(text) {
