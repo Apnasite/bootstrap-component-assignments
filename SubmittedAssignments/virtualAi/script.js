@@ -162,7 +162,11 @@ class VirtualAssistant extends HTMLElement {
 
   addChatMessage(message, isAI = false) {
     const chatMessage = document.createElement("div");
-    chatMessage?.classList?.add("d-flex", "mb-3", isAI ? "justify-content-start" : "justify-content-end ms-3");
+    if (chatMessage) {
+        chatMessage.classList.add("d-flex", "mb-3", isAI ? "justify-content-start" : "justify-content-end ms-3");
+    } else {
+        console.error("chatMessage element not found!");
+    }
 
     const bubble = document.createElement("div");
     bubble.className = `p-2 fs-6 ${isAI ? this.config.chatBubbleAIClass : this.config.chatBubbleUserClass}`;
@@ -181,8 +185,12 @@ class VirtualAssistant extends HTMLElement {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-US";
     utterance.onstart = () => {
-      btnAnswerMic?.style?.display = 'none';
-      this.submitAnswerButton.style.display = 'none';
+      if (btnAnswerMic) {
+        btnAnswerMic.style.display = 'none';
+      }
+      if (this && this.submitAnswerButton) {
+        this.submitAnswerButton.style.display = 'none';
+      }
     };
     utterance.onend = () => {
       btnAnswerMic.click();
