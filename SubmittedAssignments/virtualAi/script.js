@@ -37,7 +37,7 @@ class VirtualAssistant extends HTMLElement {
   connectedCallback() {
     this.renderComponent();
     this.addEventListeners();
-    this.askQuestion();
+    // this.askQuestion();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
