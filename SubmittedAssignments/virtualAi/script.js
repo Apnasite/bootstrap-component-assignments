@@ -37,7 +37,7 @@ class VirtualAssistant extends HTMLElement {
   connectedCallback() {
     this.renderComponent();
     this.addEventListeners();
-    // this.askQuestion();
+     this.askQuestion();
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -53,7 +53,7 @@ class VirtualAssistant extends HTMLElement {
       try {
         const userData = JSON.parse(newValue);
         this.data = userData;
-        this.askQuestion();
+       // this.askQuestion();
       } catch (e) {
         console.error("Invalid data JSON:", e);
       }
