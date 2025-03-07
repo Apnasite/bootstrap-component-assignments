@@ -243,7 +243,7 @@ class InterviewSelectionComponent extends HTMLElement {
         leadType:'Interview',
         module:'LMS',
         placement:'SkillsSelectionComponent',
-        redirect:`test/67b97e9b6da0f38ed9f7bf7a/interview?industry=${selectedIndustry}&role=${selectedRole}&skills=${selectedSkills.join(' ')}`
+        redirect:`test/67b97e9b6da0f38ed9f7bf7a/interview?industry=${selectedIndustry}&role=${selectedRole}&skills=${selectedSkills.join(',')}`
       }
       const customEvent = new CustomEvent('redirect', {
         bubbles: true,
