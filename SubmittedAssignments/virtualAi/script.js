@@ -187,7 +187,7 @@ class VirtualAssistant extends HTMLElement {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-US";
     utterance.onstart = () => {
-      if (btnAnswerMic) {
+      if (btnAnswerMic && btnAnswerMic?.style) {
         btnAnswerMic.style.display = 'none';
       }
       if (this && this.submitAnswerButton) {
@@ -207,7 +207,10 @@ class VirtualAssistant extends HTMLElement {
       this.startCamera();
     }
     const btnAnswerMic = this.querySelector("#btn-answer-mic");
-    btnAnswerMic.style.display = 'none';
+    if(btnAnswerMic && btnAnswerMic?.style){
+      btnAnswerMic.style.display = 'none';
+    }
+    
     const questionObj = this.data.question;
     if (!questionObj) return;
 
