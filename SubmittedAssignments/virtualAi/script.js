@@ -163,7 +163,7 @@ class VirtualAssistant extends HTMLElement {
   addChatMessage(message, isAI = false) {
     const chatMessage = document.createElement("div");
     if (chatMessage) {
-        chatMessage.classList.add("d-flex", "mb-3", isAI ? "justify-content-start" : "justify-content-end ms-3");
+        chatMessage.classList.add("d-flex", "mb-3", isAI ? "justify-content-start" : "justify-content-end" , isAI ? "me-5" : "ms-5");
     } else {
         console.error("chatMessage element not found!");
     }
