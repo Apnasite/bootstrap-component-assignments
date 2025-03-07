@@ -136,7 +136,9 @@ class VirtualAssistant extends HTMLElement {
     btnAnswerMic.addEventListener("click", () => {
       console.log('btnAnswerMic clicked')
       this.isAnsGiven=false
-      btnAnswerMic.style.display = 'none';
+      if(btnAnswerMic && btnAnswerMic?.style){
+        btnAnswerMic.style.display = 'none';
+      }
       btnSubmitAnswer.style.display = 'block';
       answerRecognition.start();
     });
