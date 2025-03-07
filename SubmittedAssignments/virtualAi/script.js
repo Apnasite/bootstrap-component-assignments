@@ -178,7 +178,7 @@ class VirtualAssistant extends HTMLElement {
 
     this.chatSection?.insertBefore(chatMessage, this.answerMicButton);
 
-    this.chatSection.scrollTop = this.chatSection?.scrollHeight;
+    this.chatSection?.scrollTop = this.chatSection?.scrollHeight;
   }
 
   speak(text) {
