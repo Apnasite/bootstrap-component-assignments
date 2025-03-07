@@ -17,17 +17,16 @@ class VirtualAssistant extends HTMLElement {
   }
 
   defaultConfig = {
-    assistantClass: "bg-dark shadow rounded-3",
-    chatClass: "bg-light border-start overflow-auto",
-    logoClass: "mb-3 p-2",
-    videoClass: "w-100 mb-3 bg-danger rounded",
-    micButtonClass: "btn btn-primary rounded-5 d-flex align-items-center justify-content-center mb-2",
-    answerMicButtonClass: "btn btn-success rounded-5 d-flex align-items-center justify-content-center mt-2 d-none",
-    cameraButtonClass: "btn btn-primary rounded-5",
-    chatBubbleUserClass: "bg-info text-white",
-    chatBubbleAIClass: "bg-danger text-white",
-    micIcon: "mic.svg",
-  };
+    assistantClass: "bg-dark shadow rounded-3 p-3", // Added padding for better visual spacing
+    chatClass: "bg-body-tertiary border-start overflow-auto p-3", // Changed to bg-body-tertiary for better theme consistency, added padding
+    logoClass: "mb-3 p-2 d-flex justify-content-center align-items-center", // Centered the logo
+    videoClass: "w-100 mb-3 rounded", // Kept as is, looks good
+    micButtonClass: "btn btn-primary rounded-circle shadow d-flex align-items-center justify-content-center mb-2", // Changed to rounded-circle and added shadow for a more polished look
+    answerMicButtonClass: "btn btn-success rounded-circle shadow d-flex align-items-center justify-content-center mt-2 d-none", // Same as above for consistency
+    cameraButtonClass: "btn btn-primary rounded-circle shadow", // Consistent styling
+    chatBubbleUserClass: "bg-primary-subtle text-dark rounded p-2 mb-2", // More subtle user bubble, better readability
+    chatBubbleAIClass: "bg-secondary-subtle text-dark rounded p-2 mb-2" // More subtle AI bubble, better readability
+};
 
   defaultData = {
     name: "Assistant",
