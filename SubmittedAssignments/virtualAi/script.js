@@ -17,7 +17,7 @@ class VirtualAssistant extends HTMLElement {
   }
 
   defaultConfig = {
-    assistantClass: "bg-dark shadow rounded-3 p-3", // Added padding for better visual spacing
+    assistantClass: "p-3", // Added padding for better visual spacing
     chatClass: "bg-body-tertiary border-start overflow-auto p-3", // Changed to bg-body-tertiary for better theme consistency, added padding
     logoClass: "mb-3 p-2 d-flex justify-content-center align-items-center", // Centered the logo
     videoClass: "w-100 mb-3 rounded", // Kept as is, looks good
@@ -25,7 +25,7 @@ class VirtualAssistant extends HTMLElement {
     answerMicButtonClass: "btn btn-success rounded-circle shadow d-flex align-items-center justify-content-center mt-2 d-none", // Same as above for consistency
     cameraButtonClass: "btn btn-primary rounded-circle shadow", // Consistent styling
     chatBubbleUserClass: "bg-primary-subtle text-dark rounded p-2 mb-2", // More subtle user bubble, better readability
-    chatBubbleAIClass: "bg-secondary-subtle text-dark rounded p-2 mb-2" // More subtle AI bubble, better readability
+    chatBubbleAIClass: "bg-info-subtle text-dark rounded p-2 mb-2" // More subtle AI bubble, better readability
 };
 
   defaultData = {
@@ -162,7 +162,7 @@ class VirtualAssistant extends HTMLElement {
 
   addChatMessage(message, isAI = false) {
     const chatMessage = document.createElement("div");
-    chatMessage.classList.add("d-flex", "mb-3", isAI ? "justify-content-start" : "justify-content-end");
+    chatMessage.classList.add("d-flex", "mb-3", isAI ? "justify-content-start" : "justify-content-end ms-3");
 
     const bubble = document.createElement("div");
     bubble.className = `p-2 fs-6 ${isAI ? this.config.chatBubbleAIClass : this.config.chatBubbleUserClass}`;
