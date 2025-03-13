@@ -63,17 +63,24 @@ class WhatsAppDashboard extends HTMLElement {
 
   async startSession(index) {
     const instance = this.instances[index];
-    const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/start-session`, {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json", 
-        Authorization: `Bearer ${instance.token}` 
-      },
-      body: JSON.stringify({ webhook: "", waitQrCode: false })
-    });
-    const data = await response.json();
-    alert(`Start Session: ${JSON.stringify(data)}`);
+    const confirmStart = confirm("Do you want to start the session?");
+    
+    if (confirmStart) {
+      const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/start-session`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json", 
+          Authorization: `Bearer ${instance.token}` 
+        },
+        body: JSON.stringify({ webhook: "", waitQrCode: false })
+      });
+      const data = await response.json();
+      alert(`Start Session: ${JSON.stringify(data)}`);
+    } else {
+      alert("Session start canceled.");
+    }
   }
+  
 
   async sendMessage(index) {
     const instance = this.instances[index];
@@ -109,9 +116,9 @@ class WhatsAppDashboard extends HTMLElement {
                   <h5 class="card-title">${instance.barnd}</h5>
                   <h6 class="card-title">${instance.mobile}</h6>
                   <p class="card-text">Endpoint: ${instance.instanceEndPoint}</p>
-                  <button class="btn btn-primary" onclick="this.getRootNode().host.checkStatus(${index})">Check Status</button>
-                  <button class="btn btn-success" onclick="this.getRootNode().host.startSession(${index})">Start Session</button>
-                  <button class="btn btn-info" onclick="this.getRootNode().host.sendMessage(${index})">Send Message</button>
+                  <button class="btn btn-primary m-1" onclick="this.getRootNode().host.checkStatus(${index})">Check Status</button>
+                  <button class="btn btn-success m-1" onclick="this.getRootNode().host.startSession(${index})">Start Session</button>
+                  <button class="btn btn-info m-1" onclick="this.getRootNode().host.sendMessage(${index})">Send Message</button>
                 </div>
               </div>
             </div>
