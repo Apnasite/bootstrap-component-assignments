@@ -25,14 +25,14 @@ class WhatsAppDashboard extends HTMLElement {
         mobile:"8180806337"
       },
       {
-        barnd:"Apnagruru",
+        barnd:"Apnaguru",
         instanceEndPoint: "https://whatsapp6.apnasite.in/api",
         token: "$2b$10$BCkpOb3Nctb2.CldiKoyiO.J1JlRvQZP5IhNAEZfAC6q4L9aJ8Viy",
         instanceName: "apnaguru2",
          mobile:"9049508514"
       },
       {
-        barnd:"Apnagruru",
+        barnd:"Apnaguru",
         instanceEndPoint: "https://whatsapp10.apnasite.in/api",
         token: "$2b$10$R3hCHf1DwvojbZwYc8iSP.QUen5Bq72aGmhIRPceVqv5PKE6jqoZO",
         instanceName: "apnaguru6",
