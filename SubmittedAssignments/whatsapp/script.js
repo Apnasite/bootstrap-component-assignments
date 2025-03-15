@@ -121,18 +121,41 @@ class WhatsAppDashboard extends HTMLElement {
     this.render();
   }
 
-  async checkStatus(index) {
+  async checkStatus(index, showAlert = false) {
     const instance = this.instances[index];
-    const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/status-session`, {
-      headers: { Authorization: `Bearer ${instance.token}` }
-    });
-    const data = await response.json();
+    try {
+      const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/status-session`, {
+        headers: { Authorization: `Bearer ${instance.token}` }
+      });
 
-    if (data.status === "QRCODE") {
-      this.showQRCode(data.qrcode);
-      this.pollStatus(index);
-    } else {
-      alert(`Status: ${JSON.stringify(data)}`);
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const statusBadge = this.querySelector(`#status-badge-${index}`);
+      if (statusBadge) {
+        statusBadge.textContent = data.status;
+        statusBadge.className = `badge ${this.getBadgeClass(data.status)}`;
+      }
+
+      if (data.status === "QRCODE") {
+        this.showQRCode(data.qrcode);
+        this.pollStatus(index);
+      } else if (data.status === "CONNECTED" || data.status === "CLOSED") {
+        console.log(`Status: ${JSON.stringify(data)}`);
+      } else {
+        this.pollStatus(index);
+      }
+    } catch (error) {
+      console.error(`Error checking status for instance ${index}:`, error);
+
+      const statusBadge = this.querySelector(`#status-badge-${index}`);
+      if (statusBadge) {
+        statusBadge.textContent = "API ERROR";
+        statusBadge.className = "position-absolute top-0 end-0 mt-3 me-3 badge bg-danger";
+      }
     }
   }
 
@@ -144,9 +167,15 @@ class WhatsAppDashboard extends HTMLElement {
       });
       const data = await response.json();
 
-      if (data.status === "CONNECTED") {
+      const statusBadge = this.querySelector(`#status-badge-${index}`);
+      if (statusBadge) {
+        statusBadge.textContent = data.status;
+        statusBadge.className = `badge ${this.getBadgeClass(data.status)}`;
+      }
+
+      if (data.status === "CONNECTED" || data.status === "CLOSED") {
         clearInterval(interval);
-        alert(`WhatsApp Connected for ${instance.mobile}`);
+        alert(`WhatsApp ${data.status} for ${instance.mobile}`);
       }
     }, 1000);
   }
@@ -175,74 +204,86 @@ class WhatsAppDashboard extends HTMLElement {
     });
     const data = await response.json();
     alert(`Start Session: ${JSON.stringify(data)}`);
+    this.checkStatus(index); // Check status after starting the session
   }
-
-  async restartSession(index) {
-    const instance = this.instances[index];
-
-    // Close WhatsApp session first
-    const closeResponse = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/close-session`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${instance.token}` }
-    });
-
-    if (closeResponse.ok) {
-      alert(`WhatsApp session closed for ${instance.instanceName}`);
-    } else {
-      alert(`Failed to close WhatsApp session for ${instance.instanceName}`);
-      return;
+  getBadgeClass(status) {
+    switch (status) {
+      case "CONNECTED":
+        return "position-absolute top-0 end-0 mt-3 me-3 badge bg-success";
+      case "CLOSED":
+        return "position-absolute top-0 end-0 mt-3 me-3 badge bg-danger";
+      case "QRCODE":
+        return "position-absolute top-0 end-0 mt-3 me-3 badge bg-warning";
+      default:
+        return "position-absolute top-0 end-0 mt-3 me-3 badge bg-secondary";
+    }
+  }
+    async restartSession(index) {
+      const instance = this.instances[index];
+  
+      // Close WhatsApp session first
+      const closeResponse = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/close-session`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${instance.token}` }
+      });
+  
+      if (closeResponse.ok) {
+        alert(`WhatsApp session closed for ${instance.instanceName}`);
+      } else {
+        alert(`Failed to close WhatsApp session for ${instance.instanceName}`);
+        return;
+      }
+  
+      // Wait for some time before starting the session again
+      setTimeout(() => {
+        this.startSession(index);
+      }, 5000); // Wait for 5 seconds
+    }
+    async sendMessage(index) {
+      const instance = this.instances[index];
+      const phone = prompt("Enter phone number (with country code):");
+      const message = prompt("Enter your message:");
+      if (!phone || !message) return;
+  
+      const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/send-message`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${instance.token}` },
+        body: JSON.stringify({ phone, isGroup: false, isNewsletter: false, isLid: false, message })
+      });
+      const data = await response.json();
+      alert(`Message Sent: ${JSON.stringify(data)}`);
     }
 
-    // Wait for some time before starting the session again
-    setTimeout(() => {
-      this.startSession(index);
-    }, 5000); // Wait for 5 seconds
-  }
-
-  async sendMessage(index) {
-    const instance = this.instances[index];
-    const phone = prompt("Enter phone number (with country code):");
-    const message = prompt("Enter your message:");
-    if (!phone || !message) return;
-
-    const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/send-message`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${instance.token}` },
-      body: JSON.stringify({ phone, isGroup: false, isNewsletter: false, isLid: false, message })
-    });
-    const data = await response.json();
-    alert(`Message Sent: ${JSON.stringify(data)}`);
-  }
-
   render() {
+    this.instances.map((instance, index) => this.checkStatus(index));
     this.innerHTML = `
       <style>
-        .container { padding: 20px; }
-        .card { margin-bottom: 20px; }
+      .container { padding: 20px; }
+      .card { margin-bottom: 20px; }
       </style>
       <div class="container">
-        <div class="row">
-          ${this.instances.map((instance, index) => `
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">${instance.brand}</h5>
-                  <h6 class="card-title">${instance.mobile}</h6>
-                  <p class="card-text">Endpoint: ${instance.instanceEndPoint}</p>
-                  <p class="card-text">Docker API: ${instance.dockerApiUrl}</p>
-                  <button class="btn btn-primary m-1" onclick="document.querySelector('whatsapp-dashboard').checkStatus(${index})">Check Status</button>
-                  <button class="btn btn-success m-1" onclick="document.querySelector('whatsapp-dashboard').startSession(${index})">Start Session</button>
-                  <button class="btn btn-warning m-1" onclick="document.querySelector('whatsapp-dashboard').restartSession(${index})">Restart Session</button>
-                  <button class="btn btn-info m-1" onclick="document.querySelector('whatsapp-dashboard').sendMessage(${index})">Send Message</button>
-                </div>
-              </div>
-            </div>
-          `).join('')}
+      <div class="row">
+        ${this.instances.map((instance, index) => `
+        <div class="col-md-4">
+          <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">${instance.brand}</h5>
+            <h6 class="card-title">${instance.mobile}</h6>
+            <p class="card-text">Endpoint: ${instance.instanceEndPoint}</p>
+            <a href="${instance.dockerApiUrl}" target="_new" class="d-block card-link">Check Docker Status</a>
+            <span id="status-badge-${index}" class="position-absolute top-0 end-0 mt-3 me-3 badge bg-secondary">UNKNOWN</span>
+            <button class="btn btn-primary m-1" onclick="document.querySelector('whatsapp-dashboard').checkStatus(${index})">Check Status</button>
+            <button class="btn btn-success m-1" onclick="document.querySelector('whatsapp-dashboard').startSession(${index})">Start Session</button>
+            <button class="btn btn-warning m-1" onclick="document.querySelector('whatsapp-dashboard').restartSession(${index})">Restart Session</button>
+            <button class="btn btn-info m-1" onclick="document.querySelector('whatsapp-dashboard').sendMessage(${index})">Send Message</button>
+          </div>
+          </div>
         </div>
+        `).join('')}
+      </div>
       </div>
     `;
   }
 }
-
 
 customElements.define("whatsapp-dashboard", WhatsAppDashboard);
