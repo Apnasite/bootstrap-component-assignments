@@ -180,27 +180,23 @@ class WhatsAppDashboard extends HTMLElement {
   async restartSession(index) {
     const instance = this.instances[index];
 
-    // Restart Docker Container first
-    const restartResponse = await fetch(`${instance.dockerApiUrl}/restart`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ containerId: instance.containerId })
-    });
-
-    if (restartResponse.ok) {
-      alert(`Docker container restarted for ${instance.instanceName}`);
-    } else {
-      alert(`Failed to restart Docker container for ${instance.instanceName}`);
-      return;
-    }
-
-    // Restart WhatsApp session after Docker restart
-    await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/close-session`, {
+    // Close WhatsApp session first
+    const closeResponse = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/close-session`, {
       method: "POST",
       headers: { Authorization: `Bearer ${instance.token}` }
     });
 
-    setTimeout(() => this.startSession(index), 2000);
+    if (closeResponse.ok) {
+      alert(`WhatsApp session closed for ${instance.instanceName}`);
+    } else {
+      alert(`Failed to close WhatsApp session for ${instance.instanceName}`);
+      return;
+    }
+
+    // Wait for some time before starting the session again
+    setTimeout(() => {
+      this.startSession(index);
+    }, 5000); // Wait for 5 seconds
   }
 
   async sendMessage(index) {
@@ -236,7 +232,7 @@ class WhatsAppDashboard extends HTMLElement {
                   <p class="card-text">Docker API: ${instance.dockerApiUrl}</p>
                   <button class="btn btn-primary m-1" onclick="document.querySelector('whatsapp-dashboard').checkStatus(${index})">Check Status</button>
                   <button class="btn btn-success m-1" onclick="document.querySelector('whatsapp-dashboard').startSession(${index})">Start Session</button>
-                  
+                  <button class="btn btn-warning m-1" onclick="document.querySelector('whatsapp-dashboard').restartSession(${index})">Restart Session</button>
                   <button class="btn btn-info m-1" onclick="document.querySelector('whatsapp-dashboard').sendMessage(${index})">Send Message</button>
                 </div>
               </div>
@@ -248,6 +244,5 @@ class WhatsAppDashboard extends HTMLElement {
   }
 }
 
-// <button class="btn btn-warning m-1" onclick="document.querySelector('whatsapp-dashboard').restartSession(${index})">Restart Session</button>
 
 customElements.define("whatsapp-dashboard", WhatsAppDashboard);
