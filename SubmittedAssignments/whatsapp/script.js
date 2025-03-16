@@ -8,7 +8,8 @@ class WhatsAppDashboard extends HTMLElement {
         token: "$2b$10$tN1bljzsVQj79UUIODheZ.rsiLmzbFDjT4fu4SE6PntPj1.yYJjwW",
         instanceName: "hh",
         mobile: "8600006783",
-        dockerApiUrl: "https://dev.erp.apnasite.in/docker"
+        dockerApiUrl: "https://whatsapp.apnasite.in/docker/",
+        dockerName: 'whatsapp1'
       },
       {
         brand: "Happy home - Maruti Sir",
@@ -16,7 +17,7 @@ class WhatsAppDashboard extends HTMLElement {
         token: "$2b$10$K5jrVqoHSyDxr9SCmmZybO52whYBqnwBe_5.hPSqzfchQc.Vm68m6",
         instanceName: "hh",
         mobile: "8390055038",
-        dockerApiUrl: "https://dev.erp.apnasite.in/docker"
+        dockerApiUrl: "https://whatsapp.apnasite.in/docker/"
       },
       {
         brand: "Happy home - Maruti Sir",
@@ -24,7 +25,7 @@ class WhatsAppDashboard extends HTMLElement {
         token: "$2b$10$dHWv_GQv3FnADD60z5ZibOZvIpRNRGf2SOBvI.p658Mr2xjh1UiVm",
         instanceName: "hh",
         mobile: "8180806337",
-        dockerApiUrl: "https://dev.erp.apnasite.in/docker"
+        dockerApiUrl: "https://whatsapp.apnasite.in/docker/"
       },
       {
         brand: "ApnaGuru - Vilas",
@@ -183,7 +184,7 @@ class WhatsAppDashboard extends HTMLElement {
   showQRCode(qrCodeUrl) {
     const qrPopup = document.createElement("div");
     qrPopup.innerHTML = `
-      <div style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;">
+      <div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;">
         <div style="background:white;padding:20px;border-radius:10px;text-align:center;">
           <h3>Scan QR Code</h3>
           <img src="${qrCodeUrl}" alt="QR Code" style="width:250px;height:250px;">
@@ -218,41 +219,42 @@ class WhatsAppDashboard extends HTMLElement {
         return "position-absolute top-0 end-0 mt-3 me-3 badge bg-secondary";
     }
   }
-    async restartSession(index) {
-      const instance = this.instances[index];
-  
-      // Close WhatsApp session first
-      const closeResponse = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/close-session`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${instance.token}` }
-      });
-  
-      if (closeResponse.ok) {
-        alert(`WhatsApp session closed for ${instance.instanceName}`);
-      } else {
-        alert(`Failed to close WhatsApp session for ${instance.instanceName}`);
-        return;
-      }
-  
-      // Wait for some time before starting the session again
-      setTimeout(() => {
-        this.startSession(index);
-      }, 5000); // Wait for 5 seconds
+
+  async restartSession(index) {
+    const instance = this.instances[index];
+
+    // Close WhatsApp session first
+    const closeResponse = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/close-session`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${instance.token}` }
+    });
+
+    if (closeResponse.ok) {
+      alert(`WhatsApp session closed for ${instance.instanceName}`);
+    } else {
+      alert(`Failed to close WhatsApp session for ${instance.instanceName}`);
+      return;
     }
-    async sendMessage(index) {
-      const instance = this.instances[index];
-      const phone = prompt("Enter phone number (with country code):");
-      const message = prompt("Enter your message:");
-      if (!phone || !message) return;
-  
-      const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/send-message`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${instance.token}` },
-        body: JSON.stringify({ phone, isGroup: false, isNewsletter: false, isLid: false, message })
-      });
-      const data = await response.json();
-      alert(`Message Sent: ${JSON.stringify(data)}`);
-    }
+
+    // Wait for some time before starting the session again
+    setTimeout(() => {
+      this.startSession(index);
+    }, 5000); // Wait for 5 seconds
+  }
+  async sendMessage(index) {
+    const instance = this.instances[index];
+    const phone = prompt("Enter phone number (with country code):");
+    const message = prompt("Enter your message:");
+    if (!phone || !message) return;
+
+    const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/send-message`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${instance.token}` },
+      body: JSON.stringify({ phone, isGroup: false, isNewsletter: false, isLid: false, message })
+    });
+    const data = await response.json();
+    alert(`Message Sent: ${JSON.stringify(data)}`);
+  }
 
   render() {
     this.instances.map((instance, index) => this.checkStatus(index));
