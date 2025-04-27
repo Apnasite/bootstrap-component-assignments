@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Sidebar</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <!-- Sidebar component -->
+    <sidebar-component
+      config='{
+        "menuButton": {
+          "showButton": true,
+          "buttonClasses": "btn btn-primary position-fixed top-0 start-0 m-3 d-md-block",
+          "iconClasses": "bi bi-list"
+        },
+        "closeButton": {
+          "buttonClasses": "btn btn-danger position-absolute top-0 end-0 m-3",
+          "iconClasses": "bi bi-x"
+        }
+      }'
+      data='{
+        "heading": " Sidebar",
+        "logo": {
+          "src": "./img/logo1.avif", 
+          "alt": "Logo",
+          "classes": "img-fluid rounded-circle w-25 mb-4 mt-4 "
+        },
+        "links": [
+          { "label": "Home", "url": "#", "iconClasses": "bi bi-house" },
+          { "label": "Profile", "url": "#", "iconClasses": "bi bi-person" },
+          {
+            "label": "Settings",
+            "url": "#",
+            "iconClasses": "bi bi-gear",
+            "dropdown": [
+              { "label": "Account", "url": "#" },
+              { "label": "Privacy", "url": "#" }
+            ]
+          },
+          { "label": "Help", "url": "#", "iconClasses": "bi bi-question-circle" }
+        ]
+      }'
+    ></sidebar-component>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+
+</html>
