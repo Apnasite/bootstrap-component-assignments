@@ -1,5 +1,20 @@
 # 🧩 Bootstrap Website Theme with JavaScript Web Components
 
+## 📌 Project Overview
+
+This project is developed and maintained by **Maha Mission Education and Career Council (NGO)** through learning projects on **ApnaGuru.in**. It is proudly supported by **Apnasite IT Services Pvt. Ltd.**, which provides: ✅ **Technical support**\
+✅ **Mentorship**\
+✅ **Deployment**\
+✅ **Ongoing maintenance** of these projects
+
+**🌐 Live URL:** [https://themes.apnasite.in](https://themes.apnasite.in)\
+**📢 Join us:** [https://apnaguru.in](https://aapn.in/M7PM3JB5)\
+**📌 Organization:** [https://mmeac.org](https://mmeac.org)\
+**🏢 Company:** [https://apnasite.in](https://apnasite.in)\
+**📞 Call/WhatsApp:** +91-8999417889
+
+---
+
 ## 🧭 Goal
 
 Build a **modular, reusable UI using JavaScript Web Components**. Each component should:
