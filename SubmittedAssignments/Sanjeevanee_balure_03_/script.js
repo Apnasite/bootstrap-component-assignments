@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
      exploreMenuButton.addEventListener('click', () => {
        alert('Menu exploration functionality coming soon!');
      });
-});
+       }
+     });
 let slideIndex = 1;
 showSlides(slideIndex);
 
@@ -49,12 +50,7 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
 }
-// script.js
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("Our Culinary Journey page loaded.");
-  
-  // You can add further interactivity here (e.g., image modals, animations, etc.)
-});
+
 
 const testimonialCards = document.querySelectorAll('.testimonial-card');
 const testimonialDots = document.querySelectorAll('.dot');
@@ -79,10 +75,12 @@ testimonialDots[i].classList.add('active');
 });
 
 // Optional Auto-Switch
-setInterval(() => {
- current = (current + 1) % testimonialCards.length;
-  showTestimonial(current);
-}, 5000);
+if (testimonialCards.length > 0) {
+   setInterval(() => {
+     current = (current + 1) % testimonialCards.length;
+     showTestimonial(current);
+   }, 5000);
+ }
 
 const reservationForm = document.getElementById('reservation-form');
 if (reservationForm) {
