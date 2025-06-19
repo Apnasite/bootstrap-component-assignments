@@ -25,7 +25,7 @@ nav ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  text-align: 80 px;
+  text-align: center;
   
 }
 
@@ -113,7 +113,6 @@ button:hover {
   height: auto;
   display: block;
 }
-* {box-sizing:border-box}
 
 .slideshow-container {
   max-width: 1000px;
@@ -241,7 +240,7 @@ button:hover {
     z-index: 2;
     border-radius: 10px;
     border: 5px solid
- color-mix(in srgb, var(--default-color), transparent 80%);
+     color-mix(in srgb, var(--default-color, #ffffff), transparent 80%);
 }
 
 
@@ -254,7 +253,7 @@ button:hover {
   font-size: 1.2rem;
 }
 /* Global styles */
-    Container {
+    .container {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -805,7 +804,7 @@ h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-info {
+.info {
   background: url('https://www.transparenttextures.com/patterns/black-paper.png');
   background-color: #000;
   color: #fff;
@@ -866,7 +865,7 @@ info {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
 }
 
-book a table{
+.book a table{
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -940,10 +939,10 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s ease;
-  index
+  /* removed incomplete property */
 }
 
-button:hover {
+.contact button:hover {
   background: #e0c29b;
 }
 
@@ -954,7 +953,7 @@ button:hover {
       box-sizing: border-box;
     }
 
-    location {
+    .location {
       font-family: 'Segoe UI', sans-serif;
       background: #0f0f0f;
       color: white;
@@ -1096,7 +1095,7 @@ button:hover {
       }
     }
 
- card {
+ .card {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -1399,7 +1398,7 @@ img {
 }
 
 
-contact {
+.contact {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -1651,3 +1650,5 @@ body {
 #scrollTopBtn:hover {
   background: #d0934c;
 }
+
+/* End of stylesheet */
