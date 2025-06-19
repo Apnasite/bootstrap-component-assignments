@@ -48,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // You can add further interactivity here (e.g., image modals, animations, etc.)
 });
 
-const cards = document.querySelectorAll('.testimonial-card');
-const dots = document.querySelectorAll('.dot');
+const testimonialCards = document.querySelectorAll('.testimonial-card');
++const testimonialDots = document.querySelectorAll('.dot');
 let current = 1;
 
 function showTestimonial(index) {
@@ -76,37 +76,40 @@ setInterval(() => {
   showTestimonial(current);
 }, 5000);
 
-document.getElementById('reservation-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('Your reservation has been submitted!');
-});
+const reservationForm = document.getElementById('reservation-form');
+if (reservationForm) {
+  reservationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Your reservation has been submitted!');
+  });
+}
 
 
 function reserveVenue() {
   alert("Thank you! We will contact you soon to reserve your venue.");
 }
 
+   const contactForm = document.getElementById("contactForm");
+ if (contactForm) {
+   contactForm.addEventListener("submit", function (e) {
+     e.preventDefault();
+     alert("Message sent successfully!");
+      this.reset();
+   });
+ }
 
-
-
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("Message sent successfully!");
-  this.reset();
-});
-
-
-
-// Scroll to top button
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-window.addEventListener("scroll", () => {
-  scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
-});
+if (scrollTopBtn) {
+  window.addEventListener("scroll", () => {
+    scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+  });
 
-scrollTopBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 
 
 // Helper: Parse JSON safely
@@ -837,7 +840,3 @@ window.customElementsList.push(
     { component: "faq-section", componentClass: FaqSection },
     { component: "footer-section", componentClass: FooterSection }
 );
-
-
-
-
