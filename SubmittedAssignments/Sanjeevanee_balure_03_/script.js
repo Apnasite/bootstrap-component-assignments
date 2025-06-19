@@ -1,17 +1,21 @@
 // Wait for the DOM to fully load before attaching event listeners.
 document.addEventListener('DOMContentLoaded', () => {
-  const bookTableButton = document.querySelector('.book-table');
-  const exploreMenuButton = document.querySelector('.explore-menu');
+   const bookTableButton = document.querySelector('.book-table');
+   const exploreMenuButton = document.querySelector('.explore-menu');
+
 
   // Event for booking a table
-  bookTableButton.addEventListener('click', () => {
-    alert('Table booking functionality coming soon!');
-  });
-
-  // Event for exploring the menu
-  exploreMenuButton.addEventListener('click', () => {
-    alert('Menu exploration functionality coming soon!');
-  });
+   if (bookTableButton) {
+     bookTableButton.addEventListener('click', () => {
+       alert('Table booking functionality coming soon!');
+     });
+   }
+                        
+   // Event for exploring the menu
+   if (exploreMenuButton) {
+     exploreMenuButton.addEventListener('click', () => {
+       alert('Menu exploration functionality coming soon!');
+     });
 });
 let slideIndex = 1;
 showSlides(slideIndex);
@@ -30,6 +34,10 @@ function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
   let dots = document.getElementsByClassName("dot");
+
+   // Check if elements exist before proceeding
+   if (!slides.length || !dots.length) return;
+  
   if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {
@@ -49,21 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const testimonialCards = document.querySelectorAll('.testimonial-card');
-+const testimonialDots = document.querySelectorAll('.dot');
+const testimonialDots = document.querySelectorAll('.dot');
 let current = 1;
 
 function showTestimonial(index) {
-  cards.forEach((card, i) => {
-    card.classList.remove('active');
-    dots[i].classList.remove('active');
+testimonialCards.forEach((card, i) => {
+card.classList.remove('active'); 
+testimonialDots[i].classList.remove('active');   
     if (i === index) {
       card.classList.add('active');
-      dots[i].classList.add('active');
+testimonialDots[i].classList.add('active');
     }
   });
 }
 
-dots.forEach((dot, i) => {
+  testimonialDots.forEach((dot, i) => {
   dot.addEventListener('click', () => {
     current = i;
     showTestimonial(i);
@@ -72,7 +80,7 @@ dots.forEach((dot, i) => {
 
 // Optional Auto-Switch
 setInterval(() => {
-  current = (current + 1) % cards.length;
+ current = (current + 1) % testimonialCards.length;
   showTestimonial(current);
 }, 5000);
 
