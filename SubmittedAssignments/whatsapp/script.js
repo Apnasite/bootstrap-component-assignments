@@ -327,14 +327,18 @@ class WhatsAppChatModal extends HTMLElement {
   }
 
   async loadChats() {
-    // Simulate WPPConnect API: /chats
+    // WPPConnect API: POST /{session}/list-chats
     try {
-      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/chats`, {
-        headers: { Authorization: `Bearer ${this.instance.token}` }
+      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/list-chats`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.instance.token}` },
+        body: JSON.stringify({})
       });
       const data = await res.json();
-      this.chats = data.filter(c => !c.isGroup);
-      this.groups = data.filter(c => c.isGroup);
+      // data.response is the array of chats
+      const chats = Array.isArray(data.response) ? data.response : [];
+      this.chats = chats.filter(c => !c.isGroup);
+      this.groups = chats.filter(c => c.isGroup);
       this.render();
     } catch (e) {
       this.chats = [];
@@ -344,13 +348,14 @@ class WhatsAppChatModal extends HTMLElement {
   }
 
   async loadMessages(chatId) {
-    // Simulate WPPConnect API: /messages
+    // WPPConnect API: GET /{session}/all-messages-in-chat/{phone}
     try {
-      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/messages/${chatId}`, {
+      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/all-messages-in-chat/${encodeURIComponent(chatId)}`, {
         headers: { Authorization: `Bearer ${this.instance.token}` }
       });
       const data = await res.json();
-      this.messages = data;
+      // data.response is the array of messages
+      this.messages = Array.isArray(data.response) ? data.response : [];
       this.render();
       this.scrollToBottom();
     } catch (e) {
@@ -373,11 +378,14 @@ class WhatsAppChatModal extends HTMLElement {
     const msg = input.value.trim();
     if (!msg || !this.selectedChat) return;
     input.value = '';
-    // Simulate WPPConnect API: /send-message
+    // WPPConnect API: POST /{session}/send-message
     await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/send-message`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.instance.token}` },
-      body: JSON.stringify({ phone: this.selectedChat.id, message: msg, isGroup: !!this.selectedChat.isGroup })
+      body: JSON.stringify({
+        phone: this.selectedChat.id,
+        message: msg
+      })
     });
     setTimeout(() => this.loadMessages(this.selectedChat.id), 500);
   }
@@ -393,7 +401,7 @@ class WhatsAppChatModal extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         .modal-bg { position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:10000;display:flex;align-items:center;justify-content:center; }
-        .modal { background:#fff;width:900px;height:600px;display:flex;border-radius:10px;overflow:hidden;box-shadow:0 0 20px #0003; }
+        .modal { background:#fff;width:90vw;height:95vh;display:flex;border-radius:10px;overflow:hidden;box-shadow:0 0 20px #0003; }
         .sidebar { width:270px;background:#f7f7f7;border-right:1px solid #eee;overflow-y:auto; }
         .sidebar h4 { margin:16px 0 8px 16px;font-size:1.1em;color:#555; }
         .chat-list, .group-list { list-style:none;padding:0;margin:0; }
