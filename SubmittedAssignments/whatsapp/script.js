@@ -250,19 +250,16 @@ class WhatsAppDashboard extends HTMLElement {
       this.startSession(index);
     }, 5000); // Wait for 5 seconds
   }
-  async sendMessage(index) {
-    const instance = this.instances[index];
-    const phone = prompt("Enter phone number (with country code):");
-    const message = prompt("Enter your message:");
-    if (!phone || !message) return;
 
-    const response = await fetch(`${instance.instanceEndPoint}/${instance.instanceName}/send-message`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${instance.token}` },
-      body: JSON.stringify({ phone, isGroup: false, isNewsletter: false, isLid: false, message })
-    });
-    const data = await response.json();
-    alert(`Message Sent: ${JSON.stringify(data)}`);
+  async sendMessage(index) {
+    // Open the chat modal component, passing instance info
+    const instance = this.instances[index];
+    let chatModal = document.querySelector('whatsapp-chat-modal');
+    if (!chatModal) {
+      chatModal = document.createElement('whatsapp-chat-modal');
+      document.body.appendChild(chatModal);
+    }
+    chatModal.open(instance);
   }
 
   render() {
@@ -298,3 +295,172 @@ class WhatsAppDashboard extends HTMLElement {
 }
 
 customElements.define("whatsapp-dashboard", WhatsAppDashboard);
+
+
+  customElements.define('whatsapp-chat-modal', WhatsAppChatModal);
+
+// WhatsApp Chat Modal Component
+
+class WhatsAppChatModal extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.instance = null;
+    this.chats = [];
+    this.selectedChat = null;
+    this.messages = [];
+    this.groups = [];
+    this.pollInterval = null;
+  }
+
+  open(instance) {
+    this.instance = instance;
+    this.selectedChat = null;
+    this.chats = [];
+    this.groups = [];
+    this.messages = [];
+    this.render();
+    this.style.display = 'block';
+    this.loadChats();
+  }
+
+  close() {
+    this.style.display = 'none';
+    if (this.pollInterval) clearInterval(this.pollInterval);
+  }
+
+  async loadChats() {
+    // Simulate WPPConnect API: /chats
+    try {
+      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/chats`, {
+        headers: { Authorization: `Bearer ${this.instance.token}` }
+      });
+      const data = await res.json();
+      this.chats = data.filter(c => !c.isGroup);
+      this.groups = data.filter(c => c.isGroup);
+      this.render();
+    } catch (e) {
+      this.chats = [];
+      this.groups = [];
+      this.render();
+    }
+  }
+
+  async loadMessages(chatId) {
+    // Simulate WPPConnect API: /messages
+    try {
+      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/messages/${chatId}`, {
+        headers: { Authorization: `Bearer ${this.instance.token}` }
+      });
+      const data = await res.json();
+      this.messages = data;
+      this.render();
+      this.scrollToBottom();
+    } catch (e) {
+      this.messages = [];
+      this.render();
+    }
+  }
+
+  selectChat(chat) {
+    this.selectedChat = chat;
+    this.messages = [];
+    this.render();
+    this.loadMessages(chat.id);
+    if (this.pollInterval) clearInterval(this.pollInterval);
+    this.pollInterval = setInterval(() => this.loadMessages(chat.id), 3000);
+  }
+
+  async sendMessage() {
+    const input = this.shadowRoot.querySelector('#send-input');
+    const msg = input.value.trim();
+    if (!msg || !this.selectedChat) return;
+    input.value = '';
+    // Simulate WPPConnect API: /send-message
+    await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/send-message`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.instance.token}` },
+      body: JSON.stringify({ phone: this.selectedChat.id, message: msg, isGroup: !!this.selectedChat.isGroup })
+    });
+    setTimeout(() => this.loadMessages(this.selectedChat.id), 500);
+  }
+
+  scrollToBottom() {
+    setTimeout(() => {
+      const el = this.shadowRoot.querySelector('.chat-messages');
+      if (el) el.scrollTop = el.scrollHeight;
+    }, 100);
+  }
+
+  render() {
+    this.shadowRoot.innerHTML = `
+      <style>
+        .modal-bg { position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:10000;display:flex;align-items:center;justify-content:center; }
+        .modal { background:#fff;width:900px;height:600px;display:flex;border-radius:10px;overflow:hidden;box-shadow:0 0 20px #0003; }
+        .sidebar { width:270px;background:#f7f7f7;border-right:1px solid #eee;overflow-y:auto; }
+        .sidebar h4 { margin:16px 0 8px 16px;font-size:1.1em;color:#555; }
+        .chat-list, .group-list { list-style:none;padding:0;margin:0; }
+        .chat-list li, .group-list li { padding:12px 16px;cursor:pointer;display:flex;align-items:center; }
+        .chat-list li.selected, .group-list li.selected { background:#e0f7fa; }
+        .chat-list li:hover, .group-list li:hover { background:#f0f0f0; }
+        .main { flex:1;display:flex;flex-direction:column; }
+        .chat-header { padding:16px;border-bottom:1px solid #eee;background:#fafafa; }
+        .chat-messages { flex:1;overflow-y:auto;padding:16px;background:#f9f9f9; }
+        .message { margin-bottom:12px;max-width:70%;padding:10px 14px;border-radius:16px;word-break:break-word; }
+        .sent { background:#d1f5d3;align-self:flex-end; }
+        .received { background:#fff;border:1px solid #eee;align-self:flex-start; }
+        .chat-input { display:flex;padding:12px;border-top:1px solid #eee;background:#fafafa; }
+        #send-input { flex:1;padding:8px 12px;border-radius:20px;border:1px solid #ccc;outline:none; }
+        #send-btn { margin-left:8px;padding:8px 20px;border-radius:20px;border:none;background:#25d366;color:#fff;font-weight:bold;cursor:pointer; }
+        #close-btn { position:absolute;top:10px;right:20px;background:none;border:none;font-size:1.5em;cursor:pointer;color:#888; }
+      </style>
+      <div class="modal-bg" style="display:flex;">
+        <div class="modal">
+          <div class="sidebar">
+            <h4>Chats</h4>
+            <ul class="chat-list">
+              ${this.chats.map(chat => `
+                <li class="${this.selectedChat && this.selectedChat.id === chat.id ? 'selected' : ''}" onclick="this.getRootNode().host.selectChatById('${chat.id}')">
+                  <span>${chat.name || chat.id}</span>
+                </li>
+              `).join('')}
+            </ul>
+            <h4>Groups</h4>
+            <ul class="group-list">
+              ${this.groups.map(group => `
+                <li class="${this.selectedChat && this.selectedChat.id === group.id ? 'selected' : ''}" onclick="this.getRootNode().host.selectChatById('${group.id}')">
+                  <span>${group.name || group.id}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+          <div class="main">
+            <button id="close-btn" title="Close">&times;</button>
+            <div class="chat-header">
+              ${this.selectedChat ? `<b>${this.selectedChat.name || this.selectedChat.id}</b>` : 'Select a chat or group'}
+            </div>
+            <div class="chat-messages" style="display:flex;flex-direction:column;">
+              ${this.selectedChat ? this.messages.map(msg => `
+                <div class="message ${msg.fromMe ? 'sent' : 'received'}">${msg.body}</div>
+              `).join('') : '<div style="color:#aaa;text-align:center;margin-top:40px;">No chat selected</div>'}
+            </div>
+            <div class="chat-input">
+              <input id="send-input" type="text" placeholder="Type a message..." ${!this.selectedChat ? 'disabled' : ''} />
+              <button id="send-btn" ${!this.selectedChat ? 'disabled' : ''}>Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    this.shadowRoot.querySelector('#close-btn').onclick = () => this.close();
+    this.shadowRoot.querySelector('#send-btn').onclick = () => this.sendMessage();
+    this.shadowRoot.querySelector('#send-input').onkeydown = (e) => {
+      if (e.key === 'Enter') this.sendMessage();
+    };
+  }
+
+  selectChatById(id) {
+    const chat = [...this.chats, ...this.groups].find(c => c.id === id);
+    if (chat) this.selectChat(chat);
+  }
+}
