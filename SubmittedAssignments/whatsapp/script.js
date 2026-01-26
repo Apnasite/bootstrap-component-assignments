@@ -296,9 +296,6 @@ class WhatsAppDashboard extends HTMLElement {
 
 customElements.define("whatsapp-dashboard", WhatsAppDashboard);
 
-
-  customElements.define('whatsapp-chat-modal', WhatsAppChatModal);
-
 // WhatsApp Chat Modal Component
 
 class WhatsAppChatModal extends HTMLElement {
@@ -464,3 +461,5 @@ class WhatsAppChatModal extends HTMLElement {
     if (chat) this.selectChat(chat);
   }
 }
+
+customElements.define('whatsapp-chat-modal', WhatsAppChatModal);
