@@ -3,6 +3,15 @@ class WhatsAppDashboard extends HTMLElement {
     super();
     this.instances = [
       {
+        brand: "I am Citizen",
+        instanceEndPoint: "https://wapi.iamcitizen.in/api",
+        token: "$2b$10$6ASZ5xQU1TajeMJO0_V0Quvp7MvlgrmYIeHY32AX1Ayhs9U542Xby",
+        instanceName: "9049508514",
+        mobile: "9049508514",
+        dockerApiUrl: "https://whatsapp.apnasite.in/docker/",
+        dockerName: 'whatsapp1'
+      },
+      {
         brand: "Happy home - Maruti Sir",
         instanceEndPoint: "https://whatsapp1.apnasite.in/api",
         token: "$2b$10$tN1bljzsVQj79UUIODheZ.rsiLmzbFDjT4fu4SE6PntPj1.yYJjwW",
