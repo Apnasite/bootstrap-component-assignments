@@ -337,8 +337,19 @@ class WhatsAppChatModal extends HTMLElement {
       const data = await res.json();
       // data.response is the array of chats
       const chats = Array.isArray(data.response) ? data.response : [];
-      this.chats = chats.filter(c => !c.isGroup);
-      this.groups = chats.filter(c => c.isGroup);
+      // Group detection: isGroup true, or id ends with '@g.us'
+      this.chats = chats.filter(c => {
+        if (typeof c.isGroup !== 'undefined') return !c.isGroup;
+        if (c.id && typeof c.id === 'string') return !c.id.endsWith('@g.us');
+        if (c.id && typeof c.id === 'object' && c.id._serialized) return !c.id._serialized.endsWith('@g.us');
+        return true;
+      });
+      this.groups = chats.filter(c => {
+        if (typeof c.isGroup !== 'undefined') return c.isGroup;
+        if (c.id && typeof c.id === 'string') return c.id.endsWith('@g.us');
+        if (c.id && typeof c.id === 'object' && c.id._serialized) return c.id._serialized.endsWith('@g.us');
+        return false;
+      });
       this.render();
     } catch (e) {
       this.chats = [];
@@ -348,13 +359,19 @@ class WhatsAppChatModal extends HTMLElement {
   }
 
   async loadMessages(chatId) {
-    // WPPConnect API: GET /{session}/all-messages-in-chat/{phone}
+    // Use correct id for WPPConnect API: GET /{session}/all-messages-in-chat/{phone}
+    let wid = chatId;
+    const chat = [...this.chats, ...this.groups].find(c => c.id === chatId);
+    if (chat) {
+      if (chat.id && typeof chat.id === 'object') {
+        wid = chat.id._serialized || chat.id.user || chat.id;
+      }
+    }
     try {
-      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/all-messages-in-chat/${encodeURIComponent(chatId)}`, {
+      const res = await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/all-messages-in-chat/${encodeURIComponent(wid)}`, {
         headers: { Authorization: `Bearer ${this.instance.token}` }
       });
       const data = await res.json();
-      // data.response is the array of messages
       this.messages = Array.isArray(data.response) ? data.response : [];
       this.render();
       this.scrollToBottom();
@@ -378,12 +395,16 @@ class WhatsAppChatModal extends HTMLElement {
     const msg = input.value.trim();
     if (!msg || !this.selectedChat) return;
     input.value = '';
-    // WPPConnect API: POST /{session}/send-message
+    // Use correct id for WPPConnect API: POST /{session}/send-message
+    let wid = this.selectedChat.id;
+    if (this.selectedChat.id && typeof this.selectedChat.id === 'object') {
+      wid = this.selectedChat.id._serialized || this.selectedChat.id.user || this.selectedChat.id;
+    }
     await fetch(`${this.instance.instanceEndPoint}/${this.instance.instanceName}/send-message`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.instance.token}` },
       body: JSON.stringify({
-        phone: this.selectedChat.id,
+        phone: wid,
         message: msg
       })
     });
@@ -398,6 +419,8 @@ class WhatsAppChatModal extends HTMLElement {
   }
 
   render() {
+    // Helper to get display name
+    const getChatName = chat => chat.name || chat.formattedTitle || chat.formattedName || (chat.contact && chat.contact.name) || (chat.id && chat.id.user) || (chat.id && chat.id._serialized) || chat.id || 'Unknown';
     this.shadowRoot.innerHTML = `
       <style>
         .modal-bg { position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);z-index:10000;display:flex;align-items:center;justify-content:center; }
@@ -425,16 +448,16 @@ class WhatsAppChatModal extends HTMLElement {
             <h4>Chats</h4>
             <ul class="chat-list">
               ${this.chats.map(chat => `
-                <li class="${this.selectedChat && this.selectedChat.id === chat.id ? 'selected' : ''}" onclick="this.getRootNode().host.selectChatById('${chat.id}')">
-                  <span>${chat.name || chat.id}</span>
+                <li class="${this.selectedChat && this.selectedChat.id === chat.id ? 'selected' : ''}" onclick="this.getRootNode().host.selectChatById('${typeof chat.id === 'object' ? (chat.id._serialized || chat.id.user) : chat.id}')">
+                  <span>${getChatName(chat)}</span>
                 </li>
               `).join('')}
             </ul>
             <h4>Groups</h4>
             <ul class="group-list">
               ${this.groups.map(group => `
-                <li class="${this.selectedChat && this.selectedChat.id === group.id ? 'selected' : ''}" onclick="this.getRootNode().host.selectChatById('${group.id}')">
-                  <span>${group.name || group.id}</span>
+                <li class="${this.selectedChat && this.selectedChat.id === group.id ? 'selected' : ''}" onclick="this.getRootNode().host.selectChatById('${typeof group.id === 'object' ? (group.id._serialized || group.id.user) : group.id}')">
+                  <span>${getChatName(group)}</span>
                 </li>
               `).join('')}
             </ul>
@@ -442,7 +465,7 @@ class WhatsAppChatModal extends HTMLElement {
           <div class="main">
             <button id="close-btn" title="Close">&times;</button>
             <div class="chat-header">
-              ${this.selectedChat ? `<b>${this.selectedChat.name || this.selectedChat.id}</b>` : 'Select a chat or group'}
+              ${this.selectedChat ? `<b>${getChatName(this.selectedChat)}</b>` : 'Select a chat or group'}
             </div>
             <div class="chat-messages" style="display:flex;flex-direction:column;">
               ${this.selectedChat ? this.messages.map(msg => `
