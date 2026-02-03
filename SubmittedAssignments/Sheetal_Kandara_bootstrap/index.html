@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"-->
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Great+Vibes&family=Gwendolyn:wght@400;700&family=Meie+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  
+  <title>Card Component Example</title>
+</head>
+
+<body>
+  <!-- HeaderBarSection Example -->
+  <header-bar-section data>
+    <nav>
+      <div class="logo"><i>Luxury restaurant</i></div>
+      <div class="nav-links">
+        <ul>
+          <li class="active"><a href="#">Home</a> 
+            <ul>
+              <li><a href="#">Restaurant Home</a></li>
+              <li><a href="#">Bistro Home</a></li>
+              <li><a href="#">Light Home</a></li>
+              <li><a href="#">Diner Home</a></li>
+              <li><a href="#">Left Menu Home</a></li>
+              <li><a href="#">Boxed Home</a></li>
+              <li><a href="#">Health Food Home</a></li>
+              <li><a href="#">Masonry blog</a></li>
+              <li><a href="#">Blog Home</a></li>
+              <li><a href="#">Carousel Showcase</a></li>
+              <li><a href="#">Full Screen showcase</a></li>
+              <li><a href="#">Video Home</a></li>
+              <li><a href="#">Landing</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Page</a>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Our Menu</a></li>
+              <li><a href="#">Meet The Chefs</a></li>
+              <li><a href="#">Contact Page</a></li>
+              <li><a href="#">Contact Page II</a></li>
+              <li><a href="#">Reservations</a></li>
+              <li><a href="#">Reservations II</a></li>
+              <li><a href="#">Coming Soon</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Elements</a>
+            <ul>
+              <li class="hover-me"><a href="#">Classic</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Accordions</a></li>
+                    <li><a href="#">Tabs</a></li>
+                    <li><a href="#">Buttons</a></li>
+                    <li><a href="#">Call to Action</a></li>
+                    <li><a href="#">Restaurant Item</a></li>
+                    <li><a href="#">Image Gallery</a></li>
+                    <li><a href="#">Google Maps</a></li>
+                    <li><a href="#">Contact Form</a></li>
+                  </ul>
+                </div>    
+              </li>
+              <li class="hover-me"><a href="#">charts</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Pricing Table</a></li>
+                    <li><a href="#">Progress Bar</a></li>
+                    <li><a href="#">Counters</a></li>
+                    <li><a href="#">Process</a></li>
+                    <li><a href="#">Pie Chart</a></li>
+                    <li><a href="#">Full Pie Chart</a></li>
+                    <li><a href="#">Pie Chart With Icon</a></li>
+                    <li><a href="#">Doughnut Pie chart</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="hover-me"><a href="#">Typography</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Headings</a></li>
+                    <li><a href="#">Columns</a></li>
+                    <li><a href="#">Dropcaps</a></li>
+                    <li><a href="#">Blockquote</a></li>
+                    <li><a href="#">Custom Font</a></li>
+                    <li><a href="#">Icon With Text</a></li>
+                    <li><a href="#">Lists with Icon</a></li>
+                    <li><a href="#">Message Boxes</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="hover-me"><a href="#">Interactive</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Carousel</a></li>
+                    <li><a href="#">Info Box</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Blog List</a></li>
+                    <li><a href="#">Blog List</a></li>
+                    <li><a href="#">Portfolio Slider</a></li>
+                    <li><a href="#">Video Button</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="#">savory Theme</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Portfolio</a>
+            <ul>
+              <li class="hover-me"><a href="#">Standard</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Two Columns</a></li>
+                    <li><a href="#">Three Columns</a></li>
+                    <li><a href="#">Three Columns Wide</a></li>
+                    <li><a href="#">Four Cloumns wide</a></li>
+                    <li><a href="#">Five Cloumns wide</a></li>
+                </ul>
+                </div>
+              </li>
+              <li class="hover-me"><a href="#">Gallery</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Two Columns</a></li>
+                    <li><a href="#">Three Columns</a></li>
+                    <li><a href="#">Four Columns</a></li>
+                    <li><a href="#">Three Columns Wide</a></li>
+                    <li><a href="#">Four Cloumns wide</a></li>
+                    <li><a href="#">Five Cloumns wide</a></li>
+                 </ul>
+                </div>
+              </li>
+              <li class="hover-me"><a href="#">Gallery With Space</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Two Columns</a></li>
+                    <li><a href="#">Three Columns</a></li>
+                    <li><a href="#">Four Columns</a></li>
+                    <li><a href="#">Three Columns Wide</a></li>
+                    <li><a href="#">Four Cloumns wide</a></li>
+                    <li><a href="#">Five Cloumns wide</a></li>
+                  </ul>
+
+                </div>
+              </li>
+              <li><a href="#">Masonry Wide</a></li>
+              <li class="hover-me"><a href="#">Portfolio Single</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Masonry</a></li>
+                    <li><a href="#">Masonry Wide</a></li>
+                    <li><a href="#">Big slider</a></li>
+                    <li><a href="#">Big Images</a></li>
+                    <li><a href="#">Small Slider</a></li>
+                    <li><a href="#">Small Images</a></li>
+                    <li><a href="#">Portfolio Gallery</a></li>
+                  </ul>
+                </div>
+              </li>       
+            </ul>    
+          </li>
+          <li> <a href="#">blog</a>
+            <ul>
+              <li class="hover-me"><a href="#">Standard</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Without Sidebar</a></li>
+                    <li><a href="#">Right sidebar</a></li>
+                    <li><a href="#">left sidebar</a></li> 
+                  </ul>
+                </div>
+              </li>
+              <li class="hover-me"> <a href="#">Marsonry</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Marsonry Grid</a></li>
+                    <li><a href="#">Marsonry Full Width</a></li>
+                    <li><a href="#">Marsonry Gallery</a></li> 
+                  </ul>
+                </div>
+              </li>
+              <li class="hover-me"> <a href="#">blog Single</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Right sidebar</a></li>
+                    <li><a href="#">left sidebar</a></li>
+                    <li><a href="#">Without Sidebar</a></li>
+                    <li><a href="#">Big Images</a></li>
+                    <li><a href="#">Small Slider</a></li>
+                    <li><a href="#">Small Images</a></li>
+                    <li><a href="#">Portfolio Gallery</a></li>
+                  </ul>
+                </div> 
+              </li>
+            </ul>
+          </li>
+          <li><a href="#">Shop</a>
+            <ul>
+              <li><a href="#">With Sidebar</a></li>
+              <li><a href="#">Two Columns</a></li>
+              <li><a href="#">Three Columns</a></li>
+              <li><a href="#">Four Columns</a></li>
+              <li><a href="#">Full Width</a></li>
+              <li><a href="#">Single Product</a></li>
+              <li class="hover-me"><a href="#">Shop Pages</a><i class="fa fa-angle-right"></i>
+                <div class="sub-menu">
+                  <ul>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Checkout</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                    <li><a href="#">My Account</a></li>
+                  </ul>
+
+                </div>
+                
+              </li>
+            </ul>
+          </li>
+            
+        </ul>
+      </div>
+        
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>   
+    </nav>
+  </header-bar-section>
+
+  <!-- HeroSection Example -->
+  <hero-section data>
+    <div class="swiper-imagesSwiper">
+      <div class="swiper-wrapperimage">
+        <div class="swiper-slide-1">
+          <div class="image-slide">
+            <img src="./img/top-view-food.jpg" alt="top-view-food">
+          </div>
+        </div> 
+        <div class="swiper-slide-1">
+          <div class="contener-slide">
+            <img src="./img/delicious-meals.jpg" alt="delicious-meals">
+          </div>                 
+        </div>
+        <div class="image-info">
+          <p>TASTE AND COMFORT </p>
+          <h1>Tasty and Healthy</h1>
+          <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+          <button onclick="'book now'"  class="book-now-btn">Book Now</button>
+        </div> 
+            
+      </div>
+    </div>   
+  </hero-section>
+
+  <!-- PortfolioSection Example -->
+  <portfolio-section data>
+    <section class="features">
+      <div class="features-info">
+        <p>TASTY AND CRUNCHY</p>
+        <h1>Our Specialties</h1>
+        <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+      </div>
+           
+      <div class="food-items">
+        <div class="items">
+          <img width="450px" height="300px" src="./img/delicious-ice-cream-winter.jpg" alt="delicious-ice-cream-winter">
+        </div>
+        <div class="items">
+          <img width="450px" height="300px" src="./img/cookies.jpg" alt="cookies">
+        </div>
+        <div class="items">
+          <img width="450px" height="300px" src="./img/dessert.jpg" alt="dessert">
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="content-para-1">
+        <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+        labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+        animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+        aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
+        pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+        commodo officia dolor Lorem duis laboris cupidatat officia voluptate.
+        <br><br> Culpa
+        proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+        eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+        culpa duis.</p>
+      </div>
+      <div class="content-para-2">
+        <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+        labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+        animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+        aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia
+        pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+        commodo officia dolor Lorem duis laboris cupidatat officia voluptate.
+        <br><br> Culpa
+        proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+        eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+        culpa duis.</p>
+      </div>
+
+    </section>
+
+    <section >
+      <div class="container">
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="./img/chef leah chase.png"> 
+              <div class="main-info">
+                <p>Food, in the end, in our own tradition, is something holy. It's not about nutrients and calories. It's about sharing. It's about honesty. It's about identity.  </p>
+                <h6> Louise Fresco<h6>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="./img/R.png"> 
+              <div class="main-info">
+                <p>If you really want to make a friend, go to someone's house and eat with him... the people who give you their food give you their heart.</p>
+                <h6>Cesar Chavez</h6>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <img src="./img/R (1).png">
+              <div class="main-info">
+                <p>Food is art, and food is love. And we should show love and appreciation for those who cook it by eating it with relish.</p>
+                <h6> Mark Bittman</h6>
+              </div>
+            </div>
+          </div>
+                  
+          <div class="swiper-pagination"></div>
+        </div>
+                
+      </div>
+            
+    </section>   
+  </portfolio-section>
+
+  <!-- TestimonialSection Example -->
+  <testimonial-section data>
+    <section class="dish-discription">
+      <div class="famous-dish">
+        <img src="./img/white-home-img4.jpg" alt="white-home-img4">
+        <div class="dish-info">
+          <p>TASTY AND CRUNCHY</p>
+          <h1>Losos & vegetables</h1>
+          <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+          Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+          culpa duis.</p>
+          <button onclick="'book now'"  class="book-btn">Book Now</button>
+        </div>   
+      </div>
+      <div class="white-pasta">
+        <div class="dish-name">
+          <p>TASTY AND CRUNCHY</p>
+          <h1>Losos & vegetables</h1>
+          <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+          Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+          culpa duis.</p>
+          <button onclick="'book now'"  class="book-btn">Book Now</button>
+        </div>
+        <img src="./img/white-home-img5.jpg">
+      </div>
+      <div class="famous-dish">
+        <img src="./img/white-home-img6.jpg" alt="white-home-img6">
+        <div class="dish-info">
+          <p>TASTY AND CRUNCHY</p>
+          <h1>Losos & vegetables</h1>
+          <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+          Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+          culpa duis.</p>
+          <button onclick="'book now'"  class="book-btn">Book Now</button>
+        </div>    
+      </div>
+    </section>
+
+    <section class="special-menu">
+      <div class="dishes">
+        <img width="300px" height="300px" src="./img/delicious-pizza.jpg" >
+      </div>
+
+      <div class="dishes">
+        <img width="300px" height="300px" src="./img/delicious-tray.jpg">
+      </div>
+
+      <div class="dishes">
+        <img width="300px" height="300px" src="./img/delicious-meals.jpg">
+      </div>
+
+      <div class="dishes">
+        <img width="300px" height="300px" src="./img/delicious-indian-food-tray.jpg">
+      </div>
+             
+      <div class="dishes">
+        <img  width="300px" height="300px"  src="./img/ice-cream-blue.jpg">
+      </div>
+            
+
+    </section>   
+  </testimonial-section>
+
+  <!-- FAQSection Example -->
+  <faq-section  class="form">
+    <div class="book-table">
+      <p>TASTY AND CRUNCHY</p>
+      <h1>Book a Table</h1>
+      <p>Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.</p>
+    </div>
+    <div class="first-field">
+      <select name="partySize" class="person">
+        <option value="1">1 person</option>
+        <option value="2">2 person</option>
+        <option value="3">3 person</option>
+        <option value="4">4 person</option>
+        <option value="5">5 person</option>
+        <option value="6">6 person</option>
+        <option value="7">7 person</option>
+        <option value="8">8 person</option>
+        <option value="9">9 person</option>
+        <option value="10">10 person</option>
+      </select>
+    </div>
+    <div class="second-field">
+      <input type="text" value="05/26/2025" class="date" name="startDate" id="dp1748260450803">
+    </div>
+    <div class="third-field">
+      <select name="resttime" class="time">
+        <option value="5:30pm">6:30am</option>
+        <option value="5:30pm">7:00am</option>
+        <option value="5:30pm">7:30am</option>
+        <option value="5:30pm">8:00am</option>
+        <option value="5:30pm">8:30am</option>
+        <option value="5:30pm">9:00am</option>
+        <option value="5:30pm">9:30am</option>
+        <option value="5:30pm">10:00am</option>
+        <option value="5:30pm">10:30am</option>
+        <option value="5:30pm">11:00am</option>
+        <option value="5:30pm">11:30am</option>
+        <option value="5:30pm">12:00pm</option>
+        <option value="5:30pm">12:30pm</option>
+        <option value="5:30pm">1:00pm</option>
+        <option value="5:30pm">1:30pm</option>
+        <option value="5:30pm">2:00pm</option>
+        <option value="5:30pm">2:30pm</option>
+        <option value="5:30pm">3:00pm</option>
+        <option value="5:30pm">3:30pm</option>
+        <option value="5:30pm">4:00pm</option>
+        <option value="5:30pm">4:30pm</option>
+        <option value="5:30pm">5:00pm</option>
+        <option value="5:30pm">5:30pm</option>
+        <option value="6:00pm">6:00pm</option>
+        <option value="6:30pm">6:30pm</option>
+        <option value="7:00pm" selected="selected">7:00pm</option>
+        <option value="7:30pm">7:30pm</option>
+        <option value="8:00pm">8:00pm</option>
+        <option value="8:30pm">8:30pm</option>
+        <option value="9:00pm">9:00pm</option>
+        <option value="9:30pm">9:30pm</option>
+        <option value="10:00pm">10:00pm</option>
+        <option value="10:30pm">10:30pm</option>
+        <option value="11:00pm">11:00pm</option>
+        <option value="11:30pm">11:30pm</option>
+      </select>
+    </div>
+    <button onclick="'book now'"  class="book-now">BOOK A TABLE</button>
+    <div class="powered-by">
+      <p>POWERED BY OPENTABLE</p>
+    </div>
+        
+  </faq-section>
+
+  <!-- FooterSection Example -->
+  <footer-section data>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <p>TWITTER FEED</p>
+          <P>For all the latest news and updates,follow us on twitter : @QodeInteractive.com</P>
+        </div>
+        <div class="footer-section">
+          <div class="logo">Luxury restaurant</div>
+          <p>sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</p>
+          <p>+387645826522</p>
+          <p>savory@qodeinteractive.com</p>
+          <P>Eighth Avenue 487, New York</P>
+          <div class="social-links">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-vimeo"></a>
+            <a href="#" class="fa fa-pinterest"></a>
+            <a href="#" class="fa fa-instagram"></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <p>FOLLOW ME</p>
+          <div class="image">
+            <img  src="./img/delicious-pizza.jpg">
+            <img  src="./img/delicious-tray.jpg">
+            <img  src="./img/delicious-meals.jpg">
+            <img  src="./img/delicious-indian-food-tray.jpg">
+            <img  src="./img/pasta.jpg">
+            <img  src="./img/cookies.jpg">
+          </div>   
+        </div>  
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2016 Qode Interactive, All Rights Reserved</p>
+      </div>
+    </footer> 
+  </footer-section>
+  <!--script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script-->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+
+      loop: true,
+
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+
+    });
+        
+  </script> 
+</body>
+</html>

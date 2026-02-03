@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Card Component Example</title>
+</head>
+
+<body>
+  <!-- HeaderBarSection Example -->
+  <header-bar-section data='{
+  "companyDetails": {
+    "logo": "./img/Logo-vertical.png",
+    "companyName": "Sample Company"
+  },
+  "navLinks": [
+    { "label": "Home", "url": "#home" },
+    { "label": "About", "url": "#about" },
+    { "label": "Menu", "url": "#menu" },
+    { "label": "Book a Table", "url": "#book" },
+    { "label": "Chefs", "url": "#chefs" },
+    { "label": "Events", "url": "#events" },
+    { 
+      "label": "Dropdown", 
+      "url": "#",
+      "children": [
+        { "label": "Dropdown 1", "url": "#" },
+        { "label": "Dropdown 2", "url": "#" },
+        { "label": "Dropdown 3", "url": "#" },
+        {
+          "label": "Deep Dropdown",
+          "url": "#",
+          "children": [
+            { "label": "Deep Dropdown 1", "url": "#" },
+            { "label": "Deep Dropdown 2", "url": "#" },
+            { "label": "Deep Dropdown 3", "url": "#" },
+            { "label": "Deep Dropdown 4", "url": "#" },
+            { "label": "Deep Dropdown 5", "url": "#" }
+          ]
+        },
+        { "label": "Dropdown 4", "url": "#" }
+      ]
+    },
+    { "label": "Contact", "url": "#" }
+  ],
+  "buttons": [
+    { "label": "Book Table", "url": "#", "className": "btn btn-primary ms-2" }
+  ]
+  }' config='{
+      "headerWrapperClass": "navbar navbar-expand-lg navbar-light shadow-sm fixed-top",
+      "logoClass": "navbar-brand me-4"
+    }'>
+  </header-bar-section>
+
+  <!-- HeroSection Example -->
+  <hero-section data='{
+    "heading": "Savor the Moment, One Bite at a Time",
+    "subHeading": "RESERVATIONS OPEN",
+    "description": "Discover a journey of flavors at our exquisite restaurant. Immerse yourself in a delightful dining experience crafted with passion and precision.",
+    "cards": [
+      { "heading": "Open Daily: 11am - 10pm" }
+    ],
+    "primaryButton": {
+      "text": "BOOK A TABLE",
+      "link": "#",
+      "class": "btn btn-warning fw-bold px-4"
+    },
+    "secondaryButton": {
+      "text": "EXPLORE OUR MENU",
+      "link": "#",
+      "class": "btn btn-outline-light fw-bold px-4"
+    
+    },
+    "images": [
+      "./img/hero1 (2).jpg",
+      "./img/hero3.jpg"
+
+
+    ]
+  }' 
+  config='{
+    "overlay": true,
+    "heroWrapperClass": "py-4 pb-6 position-relative text-white mb-5",
+    "heroContainerClass": "container text-left position-relative z-10"
+  }'>
+  </hero-section>
+
+
+ <!-- PortfolioSection  Example -->
+ <portfolio-section data='{
+    "heading": "Our Culinary Journey",
+    "subHeading": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+    "culinaryData": {
+      "description": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia.",
+      "established": "2005",
+      "cards": {
+        "text": "Cooking is a language through which...",
+        "author": "Executive Chef",
+        "image": "./img/user.png"
+      },
+      "images": ["./img/booktable.jpg", "./img/images2.jpg"]
+    }
+  }'
+  config='{
+    "layout": "culinary",
+    "sectionClass": "py-5 ",
+    "containerClass": "container",
+    "imageClass":"images"
+  }'>
+  </portfolio-section>
+
+
+
+  
+  <menu-section data='{
+    "heading": "Menu",
+    "subHeading": "Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit",
+    "tabs": [
+      { "label": "All", "value": "all" },
+      { "label": "Starters", "value": "Starters" },
+      { "label": "Main Courses", "value": "Main Courses" },
+      { "label": "Desserts", "value": "Desserts" },
+      { "label": "Drinks", "value": "Drinks" }
+    ],
+    "menuItems": [ 
+      {  "image": "./img/menu1.jpg", 
+        "name": "Bruschetta Trio", 
+        "description": "Crispy grilled bread with tomato mix.", 
+        "price": "8.95", 
+        "category": "Starters", 
+        "label": "Vegetarian" 
+      },
+      { "image": "./img/menu2.jpg", 
+        "name": "Calamari Fritti", 
+        "description": "Fried calamari with dip.", 
+        "price": "10.95", 
+        "category": "Starters", 
+        "label": "Seafood" 
+      },
+      { "image": "./img/menu3.jpg", 
+        "name": "Wild Mushroom Risotto", 
+        "description": "Creamy risotto with wild mushrooms.", 
+        "price": "18.95", 
+        "category": "Main Courses", 
+        "label": "Vegetarian" 
+      },
+      { "image": "./img/menu4.jpg", 
+        "name": "Braised Lamb Shank", 
+        "description": "Slow-cooked lamb in red wine.", 
+        "price": "26.95", 
+        "category": "Main Courses", 
+        "label": "Chefs Choice"
+      },
+      { "image": "./img/menu5.jpg", 
+        "name": "Chocolate Lava Cake", 
+        "description": "Warm cake with molten center.", 
+        "price": "9.95", 
+        "category": "Desserts", 
+        "label": "Gluten Free" 
+      },
+      { "image": "./img/menu6.jpg", 
+        "name": "Tiramisu", 
+        "description": "Classic Italian coffee dessert.", 
+        "price": "8.95", 
+        "category": "Desserts", 
+        "label": "Classic" 
+      },
+      { "image": "./img/menu7.jpg", 
+        "name": "Signature Cocktail", 
+        "description": "Mixed spirits with fruit infusion.", 
+        "price": "11.95", 
+        "category": "Drinks", 
+        "label": "Alcoholic" 
+      },
+      { "image": "./img/menu8.jpg", 
+        "name": "Berry Smoothie", 
+        "description": "Fresh berries blended with yogurt.", 
+        "price": "7.95", 
+        "category": "Drinks", 
+        "label": "Non-Alcoholic" 
+      }
+    ],
+    "specials": [
+    {
+      "image": "./img/special-dish1.jpg",
+      "name": "Mediterranean Grilled Salmon",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "price": "24.99",
+      "tags": ["SPECIAL", "VEGAN"]
+    },
+    {
+      "image": "./img/special-dish2.jpg",
+      "name": "Signature Ribeye Steak",
+      "description": "Nam accumsan risus ut dui pretium, eget elementum nisi.",
+      "price": "32.99",
+      "tags": ["SPECIAL", "SPICY"]
+    }
+    ]
+  }' config='{
+        "sectionClass": "py-5 text-white",
+        "containerWrapperClass": "container py-5"  
+  }'>
+  </menu-section>
+
+
+  <!-- TestimonialSection Example -->
+  <testimonial-section data='{
+     "heading": "Testimonials",
+     "description": "Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit",
+      "testimonials": [
+        {
+          "text": "Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus.",
+          "rating": 5,
+          "User": {
+            "name": "Saul Goodman",
+            "designation": "CEO & Founder",
+            "profilePicture": "./img/user.png"
+          }
+        },
+        {
+          "text": "Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor.",
+          "rating": 5,
+          "User": {
+            "name": "John Larson",
+            "designation": "Entrepreneur",
+            "profilePicture": "./img/user1.png"
+          }
+        },
+        {
+          "text": "Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor.",
+          "rating": 5,
+          "User": {
+            "name": "John Larson",
+            "designation": "Entrepreneur",
+            "profilePicture": "./img/user2.png"
+          }
+        }
+      ]
+    }'
+    config='{
+      "sectionClass": "bg-dark bg-opacity-25  text-white py-5",
+      "containerWrapperClass": "container"
+    }'>
+  </testimonial-section>
+
+  <!--chefs-section-->
+  <chef-team
+  data='{
+    "heading": "Chefs",
+    "subHeading": "Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit",
+    "featuredChef": {
+      "name": "Gabriel Turner",
+      "title": "Executive Chef",
+      "image": "./img/chef1.jpg",
+      "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+      "awards": ["James Beard Award", "Two Michelin Stars"],
+      "signature": "Elliot Johnson"
+    },
+    "chefs": [
+      {
+        "name": "Sophia Martinez",
+        "title": "Pastry Chef",
+        "image": "./img/chef2.jpg",
+        "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+      },
+      {
+        "name": "Marcus Chen",
+        "title": "Sous Chef",
+        "image": "./img/chef3.jpg",
+        "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+      },
+      {
+        "name": "Jonathan Williams",
+        "title": "Head of Bar",
+        "image": "./img/chef4.jpg",
+        "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+      },
+      {
+        "name": "Isabella Romano",
+        "title": "Grill Master",
+        "image": "./img/chef5.jpg",
+        "description": "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat."
+      }
+    ]
+  }'
+  config='{
+    "sectionClass": "py-5 text-white ",
+    "containerWrapperClass": "container"
+  }'>
+  </chef-team>
+
+  <!--booktable section example-->
+  <book-table-section data='{
+    "heading": "Book Your Table",
+    "subHeading": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Aliquam erat volutpat.",
+    "cards": [
+      {
+        "heading": "Opening Hours",
+        "subHeading": "Monday - Friday: 11:00 AM - 11:00 PM\nSaturday - Sunday: 10:00 AM - 12:00 AM",
+        "icon": "<i class=\"bi bi-clock\"></i>"
+      },
+      {
+        "heading": "Location",
+        "subHeading": "1234 Main Street, Suite 100\nBoston, MA 02110",
+        "icon": "<i class=\"bi bi-geo-alt\"></i>"
+      },
+      {
+        "heading": "Call Us",
+        "subHeading": "+1 (617) 555-1234",
+        "icon": "<i class=\"bi bi-telephone\"></i>"
+      }
+    ],
+    "images": [
+      "./img/booktable.jpg"
+    ],
+    "form": {
+    "heading": "Book A Table",
+    "description": "Please fill the form below to make a reservation",
+    "fields": [
+      {
+        "type": "text",
+        "placeholder": "Your Name",
+        "required": true
+      },
+      {
+        "type": "email",
+        "placeholder": "Your Email",
+        "required": true
+      },
+      {
+        "type": "tel",
+        "placeholder": "Your Phone",
+        "required": true
+      },
+      {
+        "type": "select",
+        "placeholder": "Number of guests",
+        "options": ["1", "2", "3", "4", "5+"],
+        "required": true
+      },
+      {
+        "type": "date",
+        "placeholder": "Select Date",
+        "required": true
+      },
+      {
+        "type": "time",
+        "placeholder": "Select Time",
+        "required": true
+      },
+      {
+        "type": "textarea",
+        "placeholder": "Special Requests (Optional)",
+        "rows": 3,
+        "required": false
+      }
+    ],
+    "submitText": "Book Now"
+  }
+  
+   }' 
+   config='{
+     "layout": "culinary",
+     "sectionClass": "py-5 text-white",
+     "containerClass": "container"
+    }'>
+  </book-table-section>
+  <!--find-us section example-->
+  <find-us-section data='{
+    "headingSection": {
+    "title": "Location",
+    "subtitle": "Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit"
+  },
+  "heading": "Find Us",
+  "subHeading": "Visit Us Today",
+  "mapEmbedUrl": "https://www.google.com/maps/embed?pb=...",
+  "location": {
+    "label": "Our Location",
+    "address": "123 Culinary Avenue, Manhattan, NY 10001",
+    "icon": "geo-alt"
+  },
+  "reservation": {
+    "label": "Reservations",
+    "phone": "+1 (212) 555-7890",
+    "note": "We recommend making reservations at least 48 hours in advance",
+    "icon": "telephone"
+  },
+  "hours": {
+    "label": "Hours",
+    "icon": "clock",
+    "list": [
+      { "day": "Monday - Thursday", "time": "11:00 AM - 10:00 PM" },
+      { "day": "Friday - Saturday", "time": "11:00 AM - 11:30 PM" },
+      { "day": "Sunday", "time": "10:00 AM - 9:00 PM" },
+      { "day": "Brunch Hours", "time": "Sat & Sun, 10:00 AM - 2:00 PM" }
+    ]
+  },
+  "buttons": [
+    { "label": "Make a Reservation", "type": "primary", "link": "#reservation" },
+    { "label": "Contact Us", "type": "secondary", "link": "#contact" }
+  ]
+  }'>
+  </find-us-section>
+
+  <!--event section example-->
+  <event-section
+  data='{
+    "title": "Create Unforgettable Moments",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+    "cards": [
+      {
+        "icon": "bi bi-camera",
+        "title": "Weddings & Celebrations",
+        "desc": "Perfect for all special occasions.",
+        "tag": "Up to 150 guests"
+      },
+      {
+        "icon": "bi bi-briefcase",
+        "title": "Corporate Events",
+        "desc": "Impress your colleagues with a stunning venue.",
+        "tag": "Up to 100 guests"
+      },
+      {
+        "icon": "bi bi-people",
+        "title": "Private Gatherings",
+        "desc": "Host cozy get-togethers in style.",
+        "tag": "Up to 50 guests"
+      }
+    ],
+    "images": [
+      "./img/event1.png",
+      "./img/event2.jpg",
+      "./img/event3.webp"
+    ],
+    "cta": {
+      "title": "Ready to plan your special event?",
+      "desc": "Contact us today to discuss your requirements.",
+      "button": {
+        "text": "Reserve Venue",
+        "link": "#",
+        "class": "btn btn-primary mt-3"
+      }
+    }
+  }'
+  config='{
+    "sectionClass": "py-5 text-white",
+    "containerClass": "container"
+  }'>
+  </event-section>
+
+
+  <!---featured-events section example-->
+  <featured-events data='{
+    "heading": "Upcoming Featured Events",
+    "events": [
+    {
+      "images": "./img/images1.jpeg",
+      "date": { "month": "JUN", "day": "18" },
+      "heading": "Summer Wine Festival",
+      "time": "6:00 PM - 10:00 PM",
+      "location": "Garden Terrace",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "buttonText": "View Details",
+      "link": "#"
+    },
+    {
+      "images": "./img/images2.jpg",
+      "date": { "month": "JUL", "day": "05" },
+      "heading": "Gourmet Tasting Night",
+      "time": "7:30 PM - 11:00 PM",
+      "location": "Main Dining Hall",
+      "description": "Aenean sed justo magna dolor sit amet.",
+      "buttonText": "View Details",
+      "link": "#"
+    }
+    ]
+  }' config='{
+        "sectionClass": "py-5 bg-white",
+        "containerClass": "container"
+      }'>
+  </featured-events>
+
+
+  <!-- contact Section Example -->
+  <contact-section data='{
+    "heading":"Contact",
+    "subHeading":"Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit",
+    "contact": {
+    "address": {
+      "title": "Our Address",
+      "location": "1842 Maple Avenue, Portland, Oregon 97204",
+      "icon": "bi-geo-alt"
+    },
+    "email": {
+      "title": "Email Address",
+      "emails": ["info@example.com", "contact@example.com"],
+      "icon": "bi-envelope"
+    },
+    "hours": {
+      "title": "Hours of Operation",
+      "times": ["Sunday-Fri: 9 AM - 6 PM", "Saturday: 9 AM - 4 PM"],
+      "icon": "bi-headset"
+    }
+  }
+  }' config='{
+        "sectionClass": "py-5 bg-white",
+        "containerClass": "container"
+      }'>
+  </contact-section>
+
+
+
+
+  <!-- FAQSection Example -->
+  <faq-section data='{
+  "form": {
+      "title": "Get in Touch",
+      "fields": [
+        { "type": "text", "name": "firstName", "placeholder": "First Name", "icon": "person" },
+        { "type": "email", "name": "email", "placeholder": "Email Address", "icon": "envelope" },
+        { "type": "text", "name": "subject", "placeholder": "Subject", "icon": "tag" },
+        { "type": "textarea", "name": "message", "placeholder": "Write Message...", "icon": "chat-dots" }
+      ],
+      "submitText": "Send Message"
+    },
+    "map": {
+      "embedUrl": "https://www.google.com/maps/embed?pb=..."
+    }
+  }'
+  config='{
+    "sectionClass": "faq-section py-5",
+    "containerClass": "container"
+      }'>
+  </faq-section>
+
+  <!-- FooterSection Example -->
+  <footer-section data='{
+  "companyDetails": {
+    "name": "NiceRestaurant",
+    "description": "Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.",
+    "address": {
+      "line1": "A108 Adam Street",
+      "city": "New York",
+      "state": "NY",
+      "pincode": "535022",
+      "country": "United States"
+    },
+    "contactDetails": {
+      "email": "info@example.com",
+      "phone": "+1 5589 55488 55",
+      "socialLinks": [
+        { "type": "twitter", "url": "https://twitter.com" },
+        { "type": "facebook", "url": "https://facebook.com" },
+        { "type": "instagram", "url": "https://instagram.com" },
+        { "type": "linkedin", "url": "https://linkedin.com" }
+      ]
+    }
+  },
+  "navItems": [
+    { "menuName": "Home", "url": "#" },
+    { "menuName": "About us", "url": "#" },
+    { "menuName": "Services", "url": "#" },
+    { "menuName": "Terms of service", "url": "#" },
+    { "menuName": "Privacy policy", "url": "#" }
+  ],
+  "services": [
+    { "name": "Web Design", "url": "#" },
+    { "name": "Web Development", "url": "#" },
+    { "name": "Product Management", "url": "#" },
+    { "name": "Marketing", "url": "#" },
+    { "name": "Graphic Design", "url": "#" }
+  ]
+  }' config='{
+      "sectionClass": "footer-section  text-light pt-5 pb-3",
+      "containerClass": "container"
+   }'>
+  </footer-section>
+
+  <script src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
